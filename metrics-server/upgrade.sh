@@ -17,8 +17,8 @@ NAMESPACE="metrics-server"
 
 if [ -z "${MP_KUBERNETES}" ]; then
     # use local version of values.yml
-    ROOT_DIR=$(git rev-parse --show-toplevel)
-    values="$ROOT_DIR/stacks/metrics-server/values.yml"
+    script_dir="$(cd "$(dirname "$0")" && pwd)"
+    values="${script_dir}/values.yml"
 else
     # use github hosted master version of values.yml
     values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/master/stacks/metrics-server/values.yml"
