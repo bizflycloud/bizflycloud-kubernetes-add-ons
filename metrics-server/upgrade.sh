@@ -17,11 +17,11 @@ NAMESPACE="metrics-server"
 
 if [ -z "${MP_KUBERNETES}" ]; then
     # use local version of values.yml
-    script_dir="$(cd "$(dirname "$0")" && pwd)"
+    script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
     values="${script_dir}/values.yml"
 else
     # use github hosted master version of values.yml
-    values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/master/stacks/metrics-server/values.yml"
+    values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/master/metrics-server/values.yml"
 fi
 
 helm upgrade "$STACK" "$CHART" \
