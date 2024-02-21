@@ -1,4 +1,5 @@
 {
+type: "metrics-server",
 name: "Kubernetes Metrics Server",
 version: "v0.6.4",
 short_description: "Kubernetes Metrics Server là một thành phần của hệ thống Kubernetes được sử dụng để thu thập các metric sử dụng của các tài nguyên và hoạt động của các container trong cluster Kubernetes",

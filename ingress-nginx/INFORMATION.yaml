@@ -1,4 +1,5 @@
 {
+  type: "ingress-nginx",
   name: "NGINX Ingress Controller",
   version: "v1.9.5",
   short_description: "NGINX Ingress Cotnroller là một phần mêm mã nguồn mã được sử dụng để quản lý và điều hướng lưu lượng vào các ứng dụng chạy trên Kubernetes",

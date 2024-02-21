@@ -24,7 +24,6 @@ Sử dụng Helm để cài đặt NGINX Ingress Controller:
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm install nginx-ingress ingress-nginx/ingress-nginx --namespace nginx-ingress
 
-
 ## Bước 3: Kiểm tra trạng thái của NGINX Ingress Controller
 
 Để kiểm tra trạng thái của NGINX Ingress Controller, sử dụng lệnh sau:
