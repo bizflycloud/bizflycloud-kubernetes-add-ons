@@ -14,37 +14,42 @@ Kubernetes Metrics Server là một thành phần quan trọng trong hệ thốn
 
 Tải Metrics Server YAML file từ GitHub repository:
 
+```bash
 wget https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
-
+```
 
 ## Bước 2: Sửa đổi file YAML
 
 Mở file YAML và tìm đến phần args trong container metrics-server để thêm các cấu hình sau:
 
+```yaml
 args:
   - --kubelet-insecure-tls
   - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
-
+```
 
 ## Bước 3: Cài đặt Metrics Server
 
 Sử dụng lệnh kubectl để cài đặt Metrics Server:
 
+```bash
 kubectl apply -f components.yaml
-
+```
 
 Kiểm tra trạng thái của Metrics Server bằng lệnh:
 
+```bash
 kubectl get deployment metrics-server -n kube-system
-
+```
 
 ## Bước 4: Kiểm tra Metrics Server hoạt động
 
 Để kiểm tra Metrics Server hoạt động đúng, sử dụng lệnh sau:
 
+```bash
 kubectl top nodes
 kubectl top pods
-
+```
 
 Nếu bạn nhận được dữ liệu về tài nguyên sử dụng của nodes và pods, có nghĩa là Metrics Server đã được cài đặt và hoạt động thành công.
 
