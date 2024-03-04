@@ -12,7 +12,7 @@ NGINX Ingress Controller là một phần mềm mã nguồn mở được sử d
 
 ## Bước 1: Tạo namespace cho NGINX Ingress Controller
 
-Sử dụng lệnh sau để tạo namespace nginx-ingress:
+Sử dụng lệnh sau để tạo namespace ingress-nginx:
 
 ```bash
 kubectl create namespace ingress-nginx
@@ -24,7 +24,7 @@ Sử dụng Helm để cài đặt NGINX Ingress Controller:
 
 ```bash
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-helm install nginx-ingress ingress-nginx/ingress-nginx --namespace ingress-nginx
+helm install ingress-nginx ingress-nginx/ingress-nginx --namespace ingress-nginx
 ```
 
 ## Bước 3: Kiểm tra trạng thái của NGINX Ingress Controller
