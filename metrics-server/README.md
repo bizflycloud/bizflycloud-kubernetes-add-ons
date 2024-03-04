@@ -10,22 +10,32 @@ Kubernetes Metrics Server là một thành phần quan trọng trong hệ thốn
 
 # Hướng dẫn cài đặt Kubernetes Metrics Server
 
-## Bước 1: Cài đặt Metrics Server
+## Bước 1: Tạo namespace cho Kubernetes Metrics Server
 
-Tải Metrics Server YAML file từ GitHub repository:
+Sử dụng lệnh sau để tạo namespace metrics-server:
 
 ```bash
-helm upgrade metrics-server/metrics-server metrics-server --namespace metrics-server
+kubectl create ns metrics-server
 ```
 
-## Bước 2: Kiểm tra cài đặt metrics server
+## Bước 2: Cài đặt Metrics Server
+
+
+Sử dụng Helm để cài đặt Kubernetes Metrics Server:
+
+```bash
+helm install metrics-server metrics-server/metrics-server --namespace metrics-server
+```
+
+## Bước 3: Kiểm tra cài đặt metrics server
+
 Kiểm tra trạng thái của Metrics Server bằng lệnh:
 
 ```bash
-kubectl get deployment metrics-server -n kube-system
+kubectl get deployment metrics-server -n metrics-server
 ```
 
-## Bước 3: Kiểm tra Metrics Server hoạt động
+## Bước 4: Kiểm tra Metrics Server hoạt động
 
 Để kiểm tra Metrics Server hoạt động đúng, sử dụng lệnh sau:
 
