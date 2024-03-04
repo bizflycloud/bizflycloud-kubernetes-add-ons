@@ -2,7 +2,7 @@
   type: "ingress-nginx",
   name: "NGINX Ingress Controller",
   version: "v1.9.5",
-  short_description: "NGINX Ingress Cotnroller là một phần mêm mã nguồn mã được sử dụng để quản lý và điều hướng lưu lượng vào các ứng dụng chạy trên Kubernetes",
+  short_description: "NGINX Ingress Cotnroller là một phần mêm mã nguồn mở được sử dụng để quản lý và điều hướng lưu lượng vào các ứng dụng chạy trên Kubernetes",
   icon_url: "https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/main/ingress-nginx/images/images.svg",
   catalog: "Network"
 }
