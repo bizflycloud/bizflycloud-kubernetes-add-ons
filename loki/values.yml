@@ -1,0 +1,23 @@
+## Stack name: grafana/loki-stack
+## Ref: https://artifacthub.io/packages/helm/grafana/loki-stack/2.6.3
+##
+
+loki:
+  enabled: true
+  persistence:
+    enabled: true
+    storageClassName: premium-ssd1
+    accessModes: ["ReadWriteOnce"]
+    size: 10Gi
+
+promtail:
+  enabled: true
+
+grafana:
+  enabled: false
+
+fluent-bit:
+  enabled: false
+
+prometheus:
+  enabled: false

@@ -1,0 +1,8 @@
+{
+  type: "prometheus-community/kube-prometheus-stack",
+  name: "Kubernetes Prometheus Stack. ",
+  version: "Lorem",
+  short_description: "Kube Prometheus là một bộ sưu tập các thành phần giúp bạn giám sát các cụm Kubernetes bằng Prometheus.",
+  icon_url: "https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/main/prometheus-community/kube-prometheus-stack/images/images.svg",
+  catalog: "Monitoring"
+}

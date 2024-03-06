@@ -1,0 +1,8 @@
+{
+  type: "argo-cd",
+  name: "ArgoCD",
+  version: "2.4.0",
+  short_description: "ArgoCD là công cụ triển khai ứng dụng lên Kubernetes sử dụng GitOps",
+  icon_url: "https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/main/argo/argo-cd/images/images.svg",
+  catalog: "Developer"
+}

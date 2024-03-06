@@ -5,24 +5,24 @@ set -e
 ################################################################################
 # repo
 ################################################################################
-helm repo add {{HELM_REPO_NAME}} {{HELM_REPO_URL}}
+helm repo add jetstack https://charts.jetstack.io
 helm repo update > /dev/null
 
 ################################################################################
 # chart
 ################################################################################
-STACK="{{STACK_NAME}}"
-CHART="{{CHART_NAME}}"
-CHART_VERSION="{{CHART_VERSION}}"
-NAMESPACE="{{NAMESPACE}}"
+STACK="cert-manager"
+CHART="jetstack/cert-manager"
+CHART_VERSION="1.13.3"
+NAMESPACE="cert-manager"
 
 if [ -z "${MP_KUBERNETES}" ]; then
   # use local version of values.yml
   ROOT_DIR=$(git rev-parse --show-toplevel)
-  values="$ROOT_DIR/{{STACK_NAME}}/values.yml"
+  values="$ROOT_DIR/cert-manager/values.yml"
 else
   # use github hosted master version of values.yml
-  values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/master/{{CHART_NAME}}/values.yml"
+  values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/master/jetstack/cert-manager/values.yml"
 fi
 
 helm upgrade "$STACK" "$CHART" \

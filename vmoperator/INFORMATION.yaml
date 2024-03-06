@@ -1,0 +1,8 @@
+{
+  type: "vm/victoria-metrics-operator",
+  name: "Lorem ipsum. ",
+  version: "Lorem",
+  short_description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed egestas odio vel scelerisque blandit",
+  icon_url: "https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/main/vm/victoria-metrics-operator/images/images.svg",
+  catalog: "dolor"
+}

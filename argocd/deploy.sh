@@ -5,24 +5,24 @@ set -e
 ################################################################################
 # repo
 ################################################################################
-helm repo add {{HELM_REPO_NAME}} {{HELM_REPO_URL}}
+helm repo add argo https://argoproj.github.io/argo-helm
 helm repo update > /dev/null
 
 ################################################################################
 # chart
 ################################################################################
-STACK="{{STACK_NAME}}"
-CHART="{{CHART_NAME}}"
-CHART_VERSION="{{CHART_VERSION}}"
-NAMESPACE="{{NAMESPACE}}"
+STACK="argocd"
+CHART="argo/argo-cd"
+CHART_VERSION="4.9.4"
+NAMESPACE="argocd"
 
 if [ -z "${MP_KUBERNETES}" ]; then
   # use local version of values.yml
   ROOT_DIR=$(git rev-parse --show-toplevel)
-  values="$ROOT_DIR/{{STACK_NAME}}/values.yml"
+  values="$ROOT_DIR/argocd/values.yml"
 else
   # use github hosted master version of values.yml
-  values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/master/{{CHART_NAME}}/values.yml"
+  values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/master/argo/argo-cd/values.yml"
 fi
 
 helm upgrade "$STACK" "$CHART" \

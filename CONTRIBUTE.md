@@ -17,7 +17,7 @@ Cài đặt Helm3 lên máy. [Instructions](https://helm.sh/docs/intro/install/)
     export HELM_REPO_URL=$REPO_URL
     export STACK_NAME=$APP_NAME
     export CHART_NAME=$REPO_NAME/$APP_NAME
-    export CHART_VERSION=1.0.0
+    export CHART_VERSION=$CHART_VERSION
     export NAMESPACE=$APP_NAME
 
     ./stack-generate.sh
