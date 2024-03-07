@@ -1,7 +1,7 @@
 {
-  type: "bitnami/wordpress",
+  type: "wordpress-kubernetes",
   name: "Wordpress Kubernees",
-  version: "Lorem",
+  version: "Latest",
   short_description: "WordPress là hệ thống quản trị nội dung (CMS) mã nguồn mở được sử dụng rộng rãi nhất trên thế giới",
   icon_url: "https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/main/wordpress/images/images.svg",
   catalog: "Blogs and Forums"

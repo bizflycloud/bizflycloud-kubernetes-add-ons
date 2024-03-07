@@ -1,5 +1,5 @@
 {
-  type: "bitnami/kube-state-metrics",
+  type: "kube-state-metrics",
   name: "Kube-state-metrics",
   version: "3.8.6",
   short_description: "Kube-state-metrics là một chương trình thu thập dữ liệu trạng thái từ cụm Kubernetes ",

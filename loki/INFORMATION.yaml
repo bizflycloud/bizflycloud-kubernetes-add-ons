@@ -1,5 +1,5 @@
 {
-  type: "grafana/loki-stack",
+  type: "loki",
   name: "Grafana Loki",
   version: "2.9.9",
   short_description: "Grafana Loki là một hệ thống thu thập và lưu trữ nhật ký cho các ứng dụng và hệ thống. ",
