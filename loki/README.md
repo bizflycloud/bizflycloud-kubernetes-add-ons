@@ -1,11 +1,43 @@
-# Lorem ipsum dolor sit amet
+# Giới thiệu về Loki
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed egestas odio vel scelerisque blandit. Aliquam facilisis, lacus in tincidunt sollicitudin, nisi neque tempus eros, ac tempor ipsum nunc id odio. Mauris vel elementum erat. Phasellus feugiat elementum dui quis gravida. Vivamus porta fringilla odio, sed pretium dolor tristique eget. Morbi eget lorem ex. Quisque sit amet enim quam. Maecenas accumsan lobortis felis, et mattis dui iaculis at.
+Loki là một dịch vụ giám sát logs mã nguồn mở, được phát triển bởi cộng đồng Prometheus. Nó được thiết kế để làm giảm bớt chi phí lưu trữ logs bằng cách lưu trữ logs ở dạng nén và chỉ lưu trữ những phần quan trọng của logs.
 
-# In hendrerit elit ac blandit aliquet
+# Tác dụng của Loki
 
-Suspendisse sed magna molestie, rutrum massa ac, scelerisque sem. Morbi lacinia imperdiet sollicitudin. Duis fringilla suscipit turpis, et ornare massa convallis quis. Ut eu ex enim. Cras quam urna, faucibus sed mauris eget, ultricies pharetra lectus. Morbi aliquet efficitur est, eu dignissim mauris condimentum nec. Vivamus ultrices tempor maximus. Aliquam sodales aliquam imperdiet. Sed id libero eros. Sed cursus suscipit tortor. Praesent nec nulla libero.
+- Thu thập logs: Loki giúp thu thập và lưu trữ logs từ các ứng dụng và hệ thống trong môi trường Kubernetes.
+- Truy vấn logs: Loki cung cấp khả năng truy vấn logs một cách linh hoạt và hiệu quả, giúp người dùng dễ dàng tìm kiếm và xem logs của các ứng dụng và hệ thống.
+- Giảm chi phí lưu trữ: Nhờ cơ chế nén và chỉ lưu trữ những phần quan trọng của logs, Loki giúp giảm chi phí lưu trữ so với các giải pháp giám sát logs truyền thống.
 
-# Donec ut augue non nisl vestibulum sollicitudin vitae ac ante. Mauris eu augue urna
+# Hướng dẫn cài đặt Loki
 
-Cras pretium interdum hendrerit. In nec pellentesque arcu. Nullam bibendum condimentum dolor, a tristique nisi placerat in. Aliquam pharetra nibh quis sapien aliquam aliquet. Duis tempor ex sed feugiat malesuada. Sed augue dui, venenatis ultricies porttitor ut, viverra sed nulla.
+## Bước 1: Tạo namespace cho Loki
+
+Sử dụng lệnh sau để tạo namespace loki:
+
+```bash
+kubectl create namespace loki
+```
+## Bước 2: Cài đặt Loki
+
+Sử dụng Helm để cài đặt Loki
+
+```bash
+helm repo add loki https://grafana.github.io/loki/charts
+helm repo update
+helm install loki loki/loki --namespace loki
+```
+
+## Bước 3: Kiểm tra trạng thái của LOKI
+
+Để kiểm tra trạng thái của LOKI, sử dụng lệnh sau:
+
+```bash
+kubectl get pods
+kubectl get services
+```
+
+## Bước 4: Sử dụng LOKI
+
+Cấu hình và sử dụng Loki:
+
+- Sau khi cài đặt, bạn cần cấu hình Loki để thu thập và lưu trữ logs từ các ứng dụng và hệ thống trong môi trường Kubernetes của bạn.

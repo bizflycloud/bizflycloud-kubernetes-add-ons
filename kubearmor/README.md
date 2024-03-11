@@ -1,11 +1,45 @@
-# Lorem ipsum dolor sit amet
+# Giới thiệu về Kubearmor
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed egestas odio vel scelerisque blandit. Aliquam facilisis, lacus in tincidunt sollicitudin, nisi neque tempus eros, ac tempor ipsum nunc id odio. Mauris vel elementum erat. Phasellus feugiat elementum dui quis gravida. Vivamus porta fringilla odio, sed pretium dolor tristique eget. Morbi eget lorem ex. Quisque sit amet enim quam. Maecenas accumsan lobortis felis, et mattis dui iaculis at.
+Kubearmor là một dự án mã nguồn mở được phát triển để cung cấp bảo mật mạnh mẽ cho các ứng dụng chạy trên môi trường Kubernetes. Nó hoạt động bằng cách theo dõi và kiểm soát các hành động của các container trong cụm Kubernetes, từ đó giúp ngăn chặn các hành động không mong muốn hoặc nguy hiểm, bảo vệ cụm Kubernetes khỏi các mối đe dọa bảo mật.
 
-# In hendrerit elit ac blandit aliquet
+# Tác dụng của Kubearmor
 
-Suspendisse sed magna molestie, rutrum massa ac, scelerisque sem. Morbi lacinia imperdiet sollicitudin. Duis fringilla suscipit turpis, et ornare massa convallis quis. Ut eu ex enim. Cras quam urna, faucibus sed mauris eget, ultricies pharetra lectus. Morbi aliquet efficitur est, eu dignissim mauris condimentum nec. Vivamus ultrices tempor maximus. Aliquam sodales aliquam imperdiet. Sed id libero eros. Sed cursus suscipit tortor. Praesent nec nulla libero.
+- Bảo vệ dữ liệu và tài nguyên: Kubearmor giúp ngăn chặn và phát hiện các hành động không mong muốn hoặc nguy hiểm từ các container, bảo vệ dữ liệu và tài nguyên trong cụm Kubernetes.
 
-# Donec ut augue non nisl vestibulum sollicitudin vitae ac ante. Mauris eu augue urna
+- Phát hiện và ngăn chặn mối đe dọa bảo mật: Nó theo dõi và kiểm soát các hành động của container, giúp phát hiện và ngăn chặn các mối đe dọa bảo mật như tấn công từ phía container hoặc việc sử dụng các lỗ hổng bảo mật.
 
-Cras pretium interdum hendrerit. In nec pellentesque arcu. Nullam bibendum condimentum dolor, a tristique nisi placerat in. Aliquam pharetra nibh quis sapien aliquam aliquet. Duis tempor ex sed feugiat malesuada. Sed augue dui, venenatis ultricies porttitor ut, viverra sed nulla.
+- Audit và tuân thủ: Kubearmor cung cấp khả năng kiểm tra và ghi lại các hành động của container để giúp vận hành tuân thủ các quy định bảo mật và quy định liên quan.
+
+# Hướng dẫn cài đặt Kubearmor
+
+## Bước 1: Sử dụng lệnh sau để tạo kubearmor
+
+Sử dụng lệnh sau để tạo namespace kubearmor:
+
+```bash
+kubectl create namespace kubearmor
+```
+## Bước 2: Cài đặt Kuberarmor
+
+```bash
+helm repo add kubearmor https://kubearmor.github.io/helm-charts
+helm repo update
+helm install kubearmor kubearmor/kubearmor --namespace kubearmor
+```
+
+## Bước 3: Kiểm tra trạng thái của Kubearmor
+
+Xác nhận cài đặt thành công:
+
+```bash
+kubectl get pods
+kubectl get services
+```
+
+## Bước 4: Sử dụng Kubearmor
+
+Cấu hình và sử dụng Kubearmor:
+
+- Sau khi cài đặt, bạn cần cấu hình Kubearmor để đảm bảo rằng nó hoạt động đúng cách và phù hợp với yêu cầu bảo mật của cụm Kubernetes của bạn.
+
+Thông qua các bước trên, bạn đã cài đặt và cấu hình Kubearmor trên cụm Kubernetes của mình, sẵn sàng để bảo vệ và giám sát các ứng dụng chạy trong môi trường Kubernetes.

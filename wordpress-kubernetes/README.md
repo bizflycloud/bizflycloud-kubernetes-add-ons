@@ -1,11 +1,49 @@
-# Lorem ipsum dolor sit amet
+# Giới thiệu về WordPress trên Kubernetes
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed egestas odio vel scelerisque blandit. Aliquam facilisis, lacus in tincidunt sollicitudin, nisi neque tempus eros, ac tempor ipsum nunc id odio. Mauris vel elementum erat. Phasellus feugiat elementum dui quis gravida. Vivamus porta fringilla odio, sed pretium dolor tristique eget. Morbi eget lorem ex. Quisque sit amet enim quam. Maecenas accumsan lobortis felis, et mattis dui iaculis at.
+WordPress là một hệ thống quản lý nội dung mã nguồn mở được sử dụng rộng rãi để tạo và quản lý các trang web và blog. Kubernetes là một hệ thống mã nguồn mở giúp tự động hóa việc triển khai, mở rộng và quản lý các ứng dụng container. WordPress trên Kubernetes kết hợp sức mạnh của cả hai để cung cấp một môi trường linh hoạt, có khả năng mở rộng và độ tin cậy cao cho việc triển khai và vận hành các trang web WordPress.
 
-# In hendrerit elit ac blandit aliquet
+# Tác dụng của WordPress trên Kubernetes
 
-Suspendisse sed magna molestie, rutrum massa ac, scelerisque sem. Morbi lacinia imperdiet sollicitudin. Duis fringilla suscipit turpis, et ornare massa convallis quis. Ut eu ex enim. Cras quam urna, faucibus sed mauris eget, ultricies pharetra lectus. Morbi aliquet efficitur est, eu dignissim mauris condimentum nec. Vivamus ultrices tempor maximus. Aliquam sodales aliquam imperdiet. Sed id libero eros. Sed cursus suscipit tortor. Praesent nec nulla libero.
+- Tích hợp linh hoạt: WordPress trên Kubernetes cho phép tích hợp dễ dàng với các dịch vụ khác trong môi trường Kubernetes như cơ sở dữ liệu, lưu trữ đám mây và dịch vụ giám sát.
 
-# Donec ut augue non nisl vestibulum sollicitudin vitae ac ante. Mauris eu augue urna
+- Mở rộng linh hoạt: Kubernetes cung cấp khả năng mở rộng tự động và linh hoạt cho việc triển khai WordPress, giúp ứng dụng có thể mở rộng dễ dàng theo nhu cầu tải truy cập.
 
-Cras pretium interdum hendrerit. In nec pellentesque arcu. Nullam bibendum condimentum dolor, a tristique nisi placerat in. Aliquam pharetra nibh quis sapien aliquam aliquet. Duis tempor ex sed feugiat malesuada. Sed augue dui, venenatis ultricies porttitor ut, viverra sed nulla.
+- Độ tin cậy cao: Sử dụng Kubernetes, WordPress có thể được triển khai với độ tin cậy cao thông qua việc tự động khởi động lại các thành phần khi cần thiết và phân phối tải truy cập đến các phiên bản WordPress đang hoạt động.
+
+# Hướng dẫn cài đặt WordPress Kubernetes
+
+## Bước 1: Tạo namespace cho wordpress
+
+Sử dụng lệnh sau để tạo namespace ingress-nginx:
+
+```bash
+kubectl create namespace wordpress
+```
+
+## Bước 2: Cài đặt Wordpress Kubernetes
+
+Sử dụng Helm để cài đặt Wordpress Kubernetes
+
+```bash
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo update
+helm install my-wordpress bitnami/wordpress
+```
+
+## Bước 3: Kiểm tra trạng thái của Wordpress Container
+
+Xác nhận cài đặt thành công:
+
+```bash
+
+    kubectl get pods
+    kubectl get services
+```
+
+## Bước 4: Sử dụng Wordpress
+
+Truy cập WordPress:
+
+- Sau khi cài đặt thành công, truy cập vào WordPress thông qua địa chỉ IP hoặc tên miền được cung cấp bởi dịch vụ LoadBalancer hoặc NodePort.
+
+Thông qua các bước trên, bạn đã cài đặt và triển khai WordPress trên môi trường Kubernetes của mình bằng cách sử dụng Helm, tạo ra một môi trường linh hoạt, có khả năng mở rộng và độ tin cậy cao cho việc vận hành trang web và blog của bạn.

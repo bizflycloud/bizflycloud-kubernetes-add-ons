@@ -1,11 +1,48 @@
-# Lorem ipsum dolor sit amet
+# Giới thiệu về kube-state-metrics
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed egestas odio vel scelerisque blandit. Aliquam facilisis, lacus in tincidunt sollicitudin, nisi neque tempus eros, ac tempor ipsum nunc id odio. Mauris vel elementum erat. Phasellus feugiat elementum dui quis gravida. Vivamus porta fringilla odio, sed pretium dolor tristique eget. Morbi eget lorem ex. Quisque sit amet enim quam. Maecenas accumsan lobortis felis, et mattis dui iaculis at.
+kube-state-metrics là một dịch vụ mở rộng của Kubernetes giúp thu thập và xuất trạng thái của các tài nguyên trong một cụm Kubernetes. Nó cung cấp các số liệu và trạng thái về các tài nguyên như pods, nodes, deployments, và các đối tượng khác trong cụm Kubernetes.
 
-# In hendrerit elit ac blandit aliquet
+# Tác dụng của kube-state-metrics
 
-Suspendisse sed magna molestie, rutrum massa ac, scelerisque sem. Morbi lacinia imperdiet sollicitudin. Duis fringilla suscipit turpis, et ornare massa convallis quis. Ut eu ex enim. Cras quam urna, faucibus sed mauris eget, ultricies pharetra lectus. Morbi aliquet efficitur est, eu dignissim mauris condimentum nec. Vivamus ultrices tempor maximus. Aliquam sodales aliquam imperdiet. Sed id libero eros. Sed cursus suscipit tortor. Praesent nec nulla libero.
+- Thu thập dữ liệu: kube-state-metrics thu thập các thông tin trạng thái và số liệu về các tài nguyên Kubernetes, giúp người quản trị hiểu rõ về trạng thái và hiệu suất của cụm Kubernetes.
 
-# Donec ut augue non nisl vestibulum sollicitudin vitae ac ante. Mauris eu augue urna
+- Giám sát và theo dõi: Cung cấp dữ liệu cho các công cụ giám sát như Prometheus để giúp người quản trị giám sát và theo dõi trạng thái của cụm Kubernetes.
 
-Cras pretium interdum hendrerit. In nec pellentesque arcu. Nullam bibendum condimentum dolor, a tristique nisi placerat in. Aliquam pharetra nibh quis sapien aliquam aliquet. Duis tempor ex sed feugiat malesuada. Sed augue dui, venenatis ultricies porttitor ut, viverra sed nulla.
+- Phân tích và tối ưu hóa: Dữ liệu từ kube-state-metrics cung cấp thông tin hữu ích cho việc phân tích và tối ưu hóa hoạt động của cụm Kubernetes.
+
+# Cách cài đặt kube-state-metrics sử dụng Helm
+
+## Bước 1: Tạo namespace cho kube-state-metrics
+
+Sử dụng lệnh sau để tạo namespace kube-state-metrics:
+
+```bash
+kubectl create namespace kube-state-metrics
+```
+
+## Bước 2: Cài đặt kube-state-metrics
+
+Sử dụng Helm để cài đặt kube-state-metrics:
+
+```bash
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+helm install kube-state-metrics prometheus-community/kube-state-metrics --namespace kube-state-metrics
+```
+
+## Bước 3: Kiểm tra trạng thái của kube-state-metrics
+
+Xác nhận cài đặt thành công:
+
+```bash
+    kubectl get pods
+    kubectl get services
+```
+
+## Bước 4: Sử dụng kube-state-metrics
+
+Kết nối với Prometheus (tùy chọn):
+
+- Nếu bạn đang sử dụng Prometheus để giám sát cụm Kubernetes, hãy đảm bảo rằng bạn đã cấu hình Prometheus để thu thập dữ liệu từ kube-state-metrics.
+
+Thông qua các bước trên, bạn đã cài đặt và cấu hình kube-state-metrics trên cụm Kubernetes của mình, sẵn sàng thu thập và xuất dữ liệu về trạng thái của các tài nguyên trong cụm Kubernetes.
