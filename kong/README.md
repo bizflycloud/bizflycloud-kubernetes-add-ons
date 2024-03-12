@@ -34,8 +34,8 @@ helm install kong kong/kong --namespace kong
 Chờ đợi một vài phút để cài đặt hoàn tất và kiểm tra trạng thái của các pods và services của Kong Ingress Controller.
 
 ```bash
-kubectl get pods
-kubectl get services
+kubectl get pods -n kong
+kubectl get services -n kong
 ```
 
 ## Bước 4: Sử dụng Kong Ingress

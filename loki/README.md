@@ -32,8 +32,8 @@ helm install loki loki/loki --namespace loki
 Để kiểm tra trạng thái của LOKI, sử dụng lệnh sau:
 
 ```bash
-kubectl get pods
-kubectl get services
+kubectl get pods -n loki
+kubectl get services -n loki
 ```
 
 ## Bước 4: Sử dụng LOKI

@@ -35,8 +35,8 @@ helm install kube-state-metrics prometheus-community/kube-state-metrics --namesp
 Xác nhận cài đặt thành công:
 
 ```bash
-    kubectl get pods
-    kubectl get services
+    kubectl get pods -n kube-state-metrics
+    kubectl get services -n kube-state-metrics
 ```
 
 ## Bước 4: Sử dụng kube-state-metrics

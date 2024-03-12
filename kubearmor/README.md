@@ -32,8 +32,8 @@ helm install kubearmor kubearmor/kubearmor --namespace kubearmor
 Xác nhận cài đặt thành công:
 
 ```bash
-kubectl get pods
-kubectl get services
+kubectl get pods -n kubearmor
+kubectl get services -n kubearmor
 ```
 
 ## Bước 4: Sử dụng Kubearmor

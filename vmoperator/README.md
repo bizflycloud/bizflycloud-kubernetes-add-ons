@@ -35,7 +35,7 @@ helm install vmoperator victoria-metrics/victoria-metrics-operator --namespace v
 Để kiểm tra trạng thái của Victoria Metrics Operator, sử dụng lệnh sau:
 
 ```bash
-    kubectl get pods
+    kubectl get pods -n vmoperator
     kubectl get services
 ```
 
