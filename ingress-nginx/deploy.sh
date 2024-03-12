@@ -15,6 +15,7 @@ STACK="ingress-nginx"
 CHART="ingress-nginx/ingress-nginx"
 CHART_VERSION="4.9.0"
 NAMESPACE="ingress-nginx"
+REPO_ENV=$APPLICATION_ENV
 
 if [ -z "${MP_KUBERNETES}" ]; then
   # use local version of values.yml
@@ -22,7 +23,7 @@ if [ -z "${MP_KUBERNETES}" ]; then
   values="${script_dir}/values.yml"
 else
   # use github hosted master version of values.yml
-  values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/master/ingress-nginx/values.yml"
+  values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/$REPO_ENV/ingress-nginx/values.yml"
 fi
 
 # A timeout of 10m is needed for the Nginx Helm installation, due to the fact that DO load balancers may take a while to spin up

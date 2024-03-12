@@ -15,6 +15,7 @@ STACK="kubearmor"
 CHART="kubearmor/kubearmor-operator"
 CHART_VERSION="v1.0.1"
 NAMESPACE="kubearmor"
+REPO_ENV=$APPLICATION_ENV
 
 if [ -z "${MP_KUBERNETES}" ]; then
   # use local version of values.yml
@@ -22,7 +23,7 @@ if [ -z "${MP_KUBERNETES}" ]; then
   values="$ROOT_DIR/kubearmor/values.yml"
 else
   # use github hosted master version of values.yml
-  values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/master/kubearmor/kubearmor-operator/values.yml"
+  values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/$REPO_ENV/kubearmor/values.yml"
 fi
 
 helm upgrade "$STACK" "$CHART" \

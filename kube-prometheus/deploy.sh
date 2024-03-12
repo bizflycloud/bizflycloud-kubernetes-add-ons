@@ -15,6 +15,7 @@ STACK="kube-prometheus"
 CHART="prometheus-community/kube-prometheus-stack"
 CHART_VERSION="55.7.0"
 NAMESPACE="kube-prometheus-stack"
+REPO_ENV=$APPLICATION_ENV
 
 if [ -z "${MP_KUBERNETES}" ]; then
   # use local version of values.yml
@@ -22,7 +23,7 @@ if [ -z "${MP_KUBERNETES}" ]; then
   values="$ROOT_DIR/kube-prometheus/values.yml"
 else
   # use github hosted master version of values.yml
-  values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/master/prometheus-community/kube-prometheus-stack/values.yml"
+  values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/$REPO_ENV/kube-prometheus/values.yml"
 fi
 
 helm upgrade "$STACK" "$CHART" \

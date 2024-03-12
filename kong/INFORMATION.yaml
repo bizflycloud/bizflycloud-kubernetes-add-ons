@@ -3,6 +3,6 @@
   name: "Kong Ingress",
   version: "3.6",
   short_description: "Kong Ingress là một API Gateway cho Kubernetes",
-  icon_url: "https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/main/kong/images/images.svg",
+  icon_url: "https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/staging/kong/images/images.svg",
   catalog: "Network"
 }

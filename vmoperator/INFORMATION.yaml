@@ -3,6 +3,6 @@
   name: "Victoria Metrics",
   version: "1.96.0",
   short_description: "Victoria Metrics là một hệ thống giám sát hiệu suất cao cho các ứng dụng và cơ sở hạ tầng được xây dựng dựa trên Prometheus",
-  icon_url: "https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/main/vmoperator/images/images.svg",
+  icon_url: "https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/staging/vmoperator/images/images.svg",
   catalog: "Monitoring"
 }

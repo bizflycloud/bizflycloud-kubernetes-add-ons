@@ -3,6 +3,6 @@
   name: "Kube-state-metrics",
   version: "3.8.6",
   short_description: "Kube-state-metrics là một chương trình thu thập dữ liệu trạng thái từ cụm Kubernetes ",
-  icon_url: "https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/main/bitnami/kube-state-metrics/images/images.svg",
+  icon_url: "https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/staging/kube-state-metrics/images/images.svg",
   catalog: "Monitoring"
 }

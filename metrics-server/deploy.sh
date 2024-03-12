@@ -15,6 +15,7 @@ STACK="metrics-server"
 CHART="metrics-server/metrics-server"
 CHART_VERSION="3.11.0"
 NAMESPACE="metrics-server"
+REPO_ENV=$APPLICATION_ENV
 
 if [ -z "${MP_KUBERNETES}" ]; then
   # use local version of values.yml
@@ -22,7 +23,7 @@ if [ -z "${MP_KUBERNETES}" ]; then
   values="${script_dir}/values.yml"
 else
   # use github hosted master version of values.yml
-  values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/master/metrics-server/values.yml"
+  values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/$REPO_ENV/metrics-server/values.yml"
 fi
 
 if helm history "${STACK}" -n "${NAMESPACE}" | grep -q 'pending-install'; then
