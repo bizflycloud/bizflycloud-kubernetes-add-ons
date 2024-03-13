@@ -14,7 +14,7 @@ REPO_ENV=$APPLICATION_ENV
 STACK="loki"
 CHART="grafana/loki-stack"
 CHART_VERSION="2.9.9"
-NAMESPACE="loki-stack"
+NAMESPACE="loki"
 
 if [ -z "${MP_KUBERNETES}" ]; then
   # use local version of values.yml

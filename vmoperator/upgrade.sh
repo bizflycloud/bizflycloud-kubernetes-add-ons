@@ -13,7 +13,7 @@ helm repo update > /dev/null
 ################################################################################
 STACK="vmoperator"
 CHART="vm/victoria-metrics-operator"
-NAMESPACE="victoria-metrics"
+NAMESPACE="vmoperator"
 
 if [ -z "${MP_KUBERNETES}" ]; then
     # use local version of values.yml

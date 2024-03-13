@@ -13,7 +13,7 @@ helm repo update > /dev/null
 ################################################################################
 STACK="wordpress-kubernetes"
 CHART="bitnami/wordpress"
-NAMESPACE="wordpress"
+NAMESPACE="wordpress-kubernetes"
 
 if [ -z "${MP_KUBERNETES}" ]; then
     # use local version of values.yml

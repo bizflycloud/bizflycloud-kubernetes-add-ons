@@ -13,7 +13,7 @@ helm repo update > /dev/null
 ################################################################################
 STACK="kube-prometheus"
 CHART="prometheus-community/kube-prometheus-stack"
-NAMESPACE="kube-prometheus-stack"
+NAMESPACE="kube-prometheus"
 
 if [ -z "${MP_KUBERNETES}" ]; then
     # use local version of values.yml

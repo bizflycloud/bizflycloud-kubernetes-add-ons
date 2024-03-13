@@ -14,7 +14,7 @@ helm repo update > /dev/null
 STACK="kube-prometheus"
 CHART="prometheus-community/kube-prometheus-stack"
 CHART_VERSION="55.7.0"
-NAMESPACE="kube-prometheus-stack"
+NAMESPACE="kube-prometheus"
 REPO_ENV=$APPLICATION_ENV
 
 if [ -z "${MP_KUBERNETES}" ]; then
