@@ -1,0 +1,35 @@
+# vm/victoria-metrics-operator
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMAgent
+metadata:
+  name: vmagent
+spec:
+  selectAllByDefault: true
+  replicaCount: 1
+  image:
+    repository: victoriametrics/vmagent
+    tag: v1.96.0
+  remoteWrite:
+    - url: "http://vminsert-vmcluster.default.svc.cluster.local:8480/insert/0/prometheus/"
+---
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMCluster
+metadata:
+  name: vmcluster
+spec:
+  retentionPeriod: "12"
+  vmstorage:
+      replicaCount: 2
+      image:
+        repository: victoriametrics/vmstorage
+        tag: v1.96.0-cluster
+  vmselect:
+      replicaCount: 2
+      image:
+        repository: victoriametrics/vmselect
+        tag: v1.96.0-cluster
+  vminsert:
+      replicaCount: 2
+      image:
+        repository: victoriametrics/vminsert
+        tag: v1.96.0-cluster

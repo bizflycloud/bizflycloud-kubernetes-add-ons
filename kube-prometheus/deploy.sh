@@ -5,16 +5,16 @@ set -e
 ################################################################################
 # repo
 ################################################################################
-helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update > /dev/null
 
 ################################################################################
 # chart
 ################################################################################
-STACK="ingress-nginx"
-CHART="ingress-nginx/ingress-nginx"
-CHART_VERSION="4.9.0"
-NAMESPACE="ingress-nginx"
+STACK="kube-prometheus"
+CHART="prometheus-community/kube-prometheus-stack"
+CHART_VERSION="55.7.0"
+NAMESPACE="kube-prometheus"
 REPO_ENV=$APPLICATION_ENV
 
 if [ -z "${MP_KUBERNETES}" ]; then
@@ -23,15 +23,14 @@ if [ -z "${MP_KUBERNETES}" ]; then
   values="${script_dir}/values.yml"
 else
   # use github hosted master version of values.yml
-  values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/$REPO_ENV/ingress-nginx/values.yml"
+  values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/$REPO_ENV/kube-prometheus/values.yml"
 fi
 
-# A timeout of 10m is needed for the Nginx Helm installation, due to the fact that DO load balancers may take a while to spin up
 helm upgrade "$STACK" "$CHART" \
   --atomic \
   --create-namespace \
   --install \
+  --timeout 10m0s\
   --namespace "$NAMESPACE" \
   --values "$values" \
-  --version "$CHART_VERSION" \
-  --timeout 10m0s
+  --version "$CHART_VERSION"

@@ -40,8 +40,8 @@ kubectl get deployment metrics-server -n metrics-server
 Để kiểm tra Metrics Server hoạt động đúng, sử dụng lệnh sau:
 
 ```bash
-kubectl top nodes
-kubectl top pods
+kubectl top nodes -n metrics-server
+kubectl top pods -n metrics-server
 ```
 
 Nếu bạn nhận được dữ liệu về tài nguyên sử dụng của nodes và pods, có nghĩa là Metrics Server đã được cài đặt và hoạt động thành công.

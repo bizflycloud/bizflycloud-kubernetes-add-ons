@@ -1,0 +1,8 @@
+{
+  type: "kubearmor",
+  name: "KubeArmor",
+  version: "1.1.0",
+  short_description: "KubeArmor là một chương trình bảo mật Kubernetes ",
+  icon_url: "https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/staging/kubearmor/images/images.svg",
+  catalog: "Security"
+}

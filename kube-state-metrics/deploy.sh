@@ -5,16 +5,17 @@ set -e
 ################################################################################
 # repo
 ################################################################################
-helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update > /dev/null
+
 
 ################################################################################
 # chart
 ################################################################################
-STACK="ingress-nginx"
-CHART="ingress-nginx/ingress-nginx"
-CHART_VERSION="4.9.0"
-NAMESPACE="ingress-nginx"
+STACK="kube-state-metrics"
+CHART="bitnami/kube-state-metrics"
+CHART_VERSION="3.8.6"
+NAMESPACE="kube-state-metrics"
 REPO_ENV=$APPLICATION_ENV
 
 if [ -z "${MP_KUBERNETES}" ]; then
@@ -23,15 +24,14 @@ if [ -z "${MP_KUBERNETES}" ]; then
   values="${script_dir}/values.yml"
 else
   # use github hosted master version of values.yml
-  values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/$REPO_ENV/ingress-nginx/values.yml"
+  values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/$REPO_ENV/kube-state-metrics/values.yml"
 fi
 
-# A timeout of 10m is needed for the Nginx Helm installation, due to the fact that DO load balancers may take a while to spin up
 helm upgrade "$STACK" "$CHART" \
   --atomic \
   --create-namespace \
   --install \
+  --timeout 10m0s\
   --namespace "$NAMESPACE" \
   --values "$values" \
-  --version "$CHART_VERSION" \
-  --timeout 10m0s
+  --version "$CHART_VERSION"

@@ -5,16 +5,16 @@ set -e
 ################################################################################
 # repo
 ################################################################################
-helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo add kubearmor https://kubearmor.github.io/charts
 helm repo update > /dev/null
 
 ################################################################################
 # chart
 ################################################################################
-STACK="ingress-nginx"
-CHART="ingress-nginx/ingress-nginx"
-CHART_VERSION="4.9.0"
-NAMESPACE="ingress-nginx"
+STACK="kubearmor"
+CHART="kubearmor/kubearmor-operator"
+CHART_VERSION="v1.0.1"
+NAMESPACE="kubearmor"
 REPO_ENV=$APPLICATION_ENV
 
 if [ -z "${MP_KUBERNETES}" ]; then
@@ -23,15 +23,14 @@ if [ -z "${MP_KUBERNETES}" ]; then
   values="${script_dir}/values.yml"
 else
   # use github hosted master version of values.yml
-  values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/$REPO_ENV/ingress-nginx/values.yml"
+  values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/$REPO_ENV/kubearmor/values.yml"
 fi
 
-# A timeout of 10m is needed for the Nginx Helm installation, due to the fact that DO load balancers may take a while to spin up
 helm upgrade "$STACK" "$CHART" \
   --atomic \
   --create-namespace \
   --install \
+  --timeout 10m0s\
   --namespace "$NAMESPACE" \
   --values "$values" \
-  --version "$CHART_VERSION" \
-  --timeout 10m0s
+  --version "$CHART_VERSION"
