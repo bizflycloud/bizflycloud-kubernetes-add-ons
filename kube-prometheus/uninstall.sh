@@ -6,7 +6,7 @@ set -e
 # chart
 ################################################################################
 STACK="kube-prometheus"
-NAMESPACE="kube-prometheus-stack"
+NAMESPACE="kube-prometheus"
 
 
 helm uninstall "$STACK" \

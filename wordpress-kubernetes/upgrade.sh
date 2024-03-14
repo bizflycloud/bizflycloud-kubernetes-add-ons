@@ -21,7 +21,7 @@ if [ -z "${MP_KUBERNETES}" ]; then
     values="$ROOT_DIR/stacks/wordpress-kubernetes/values.yml"
 else
     # use github hosted master version of values.yml
-    values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/master/wordpress-kubernetes/values.yml"
+    values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons//wordpress/values.yml"
 fi
 
 helm upgrade "$STACK" "$CHART" \

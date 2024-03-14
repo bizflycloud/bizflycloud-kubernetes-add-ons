@@ -6,7 +6,7 @@ set -e
 # chart
 ################################################################################
 STACK="wordpress-kubernetes"
-NAMESPACE="wordpress"
+NAMESPACE="wordpress-kubernetes"
 
 
 helm uninstall "$STACK" \

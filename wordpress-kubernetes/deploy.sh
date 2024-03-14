@@ -14,7 +14,7 @@ helm repo update > /dev/null
 STACK="wordpress-kubernetes"
 CHART="bitnami/wordpress"
 CHART_VERSION="19.0.4"
-NAMESPACE="wordpress"
+NAMESPACE="wordpress-kubernetes"
 REPO_ENV=$APPLICATION_ENV
 
 if [ -z "${MP_KUBERNETES}" ]; then
