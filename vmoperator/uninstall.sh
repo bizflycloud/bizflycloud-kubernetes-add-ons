@@ -6,7 +6,7 @@ set -e
 # chart
 ################################################################################
 STACK="vmoperator"
-NAMESPACE="victoria-metrics"
+NAMESPACE="vmoperator"
 
 
 helm uninstall "$STACK" \

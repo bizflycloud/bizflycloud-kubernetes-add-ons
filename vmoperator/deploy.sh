@@ -13,7 +13,7 @@ helm repo update > /dev/null
 ################################################################################
 STACK="vmoperator"
 CHART="vm/victoria-metrics-operator"
-NAMESPACE="victoria-metrics"
+NAMESPACE="vmoperator"
 REPO_ENV=$APPLICATION_ENV
 
 ################################################################################
