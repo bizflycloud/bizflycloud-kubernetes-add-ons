@@ -13,7 +13,7 @@ helm repo update > /dev/null
 ################################################################################
 STACK="vmoperator"
 CHART="vm/victoria-metrics-operator"
-NAMESPACE="victoria-metrics"
+NAMESPACE="vmoperator"
 REPO_ENV=$APPLICATION_ENV
 
 ################################################################################
@@ -30,8 +30,8 @@ helm upgrade "$STACK" "$CHART" \
 # Install VictoriaMetrics Cluster with CRDs
 if [ -z "${MP_KUBERNETES}" ]; then
   # use local version of values.yml
-  ROOT_DIR=$(git rev-parse --show-toplevel)
-  VMCLUSTER="$ROOT_DIR/vmoperator/values.yml" 
+  script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+  VMCLUSTER="${script_dir}/values.yml"
   kubectl apply -n "$NAMESPACE" -f "$VMCLUSTER"
 else
   # use github hosted master version of values.yml

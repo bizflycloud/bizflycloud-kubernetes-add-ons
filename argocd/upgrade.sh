@@ -17,8 +17,8 @@ NAMESPACE="argocd"
 
 if [ -z "${MP_KUBERNETES}" ]; then
     # use local version of values.yml
-    ROOT_DIR=$(git rev-parse --show-toplevel)
-    values="$ROOT_DIR/stacks/argocd/values.yml"
+    script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+    values="${script_dir}/values.yml"
 else
     # use github hosted master version of values.yml
     values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/master/argocd/values.yml"

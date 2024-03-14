@@ -14,12 +14,12 @@ REPO_ENV=$APPLICATION_ENV
 STACK="loki"
 CHART="grafana/loki-stack"
 CHART_VERSION="2.9.9"
-NAMESPACE="loki-stack"
+NAMESPACE="loki"
 
 if [ -z "${MP_KUBERNETES}" ]; then
   # use local version of values.yml
-  ROOT_DIR=$(git rev-parse --show-toplevel)
-  values="$ROOT_DIR/loki/values.yml"
+  script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+  values="${script_dir}/values.yml"
 else
   # use github hosted master version of values.yml
   values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/$REPO_ENV/loki/values.yml"
