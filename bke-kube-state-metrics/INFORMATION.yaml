@@ -1,0 +1,8 @@
+{
+  type: "bke-kube-state-metrics",
+  name: "Bke-kube-state-metrics",
+  version: "Latest",
+  short_description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed egestas odio vel scelerisque blandit",
+  icon_url: "https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/main/kube-state-metrics/images/images.svg",
+  catalog: "BKE"
+}
