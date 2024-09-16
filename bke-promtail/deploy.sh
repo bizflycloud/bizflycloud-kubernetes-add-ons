@@ -11,7 +11,7 @@ helm repo update > /dev/null
 ################################################################################
 # chart
 ################################################################################
-STACK="promtail"
+STACK="bke-promtail"
 CHART="sample-charts/promtail"
 CHART_VERSION="0.1.0"
 NAMESPACE="bke-obs-stack"
