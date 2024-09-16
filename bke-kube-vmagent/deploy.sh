@@ -20,7 +20,7 @@ REPO_ENV=$APPLICATION_ENV
 if [ -z "${MP_KUBERNETES}" ]; then
   # use local version of values.yml
   ROOT_DIR=$(git rev-parse --show-toplevel)
-  values="$ROOT_DIR/kube-vmagent/values.yml"
+  values="$ROOT_DIR/values.yml"
 else
   # use github hosted master version of values.yml
   values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/$REPO_ENV/kube-vmagent/values.yml"
