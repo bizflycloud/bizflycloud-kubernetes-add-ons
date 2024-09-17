@@ -13,7 +13,7 @@ helm repo update > /dev/null
 ################################################################################
 STACK="bke-cluster-log"
 CHART="sample-charts/bke-cluster-log"
-NAMESPACE="bke-obs-stack"
+NAMESPACE="bke-cluster-log"
 
 if [ -z "${MP_KUBERNETES}" ]; then
     # use local version of values.yml

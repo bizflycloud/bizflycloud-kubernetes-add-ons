@@ -6,7 +6,7 @@ set -e
 # chart
 ################################################################################
 STACK="bke-cluster-metrics"
-NAMESPACE="bke-obs-stack"
+NAMESPACE="bke-cluster-metrics"
 
 
 helm uninstall "$STACK" \
