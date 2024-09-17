@@ -14,7 +14,7 @@ helm repo update > /dev/null
 STACK="bke-cluster-log"
 CHART="sample-charts/bke-cluster-log"
 CHART_VERSION="0.1.01"
-NAMESPACE="bke-obs-stack"
+NAMESPACE="bke-cluster-log"
 REPO_ENV=$APPLICATION_ENV
 
 if [ -z "${MP_KUBERNETES}" ]; then
