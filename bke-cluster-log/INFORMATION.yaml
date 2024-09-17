@@ -1,6 +1,6 @@
 {
-  type: "bke-kube-vmagent",
-  name: "Bke-kube-vmagent",
+  type: "bke-cluster-log",
+  name: "BKE Cluster Log",
   version: "Latest",
   short_description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed egestas odio vel scelerisque blandit",
   icon_url: "https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/main/{{CHART_NAME}}/images/images.svg",

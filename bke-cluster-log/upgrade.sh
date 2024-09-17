@@ -11,17 +11,17 @@ helm repo update > /dev/null
 ################################################################################
 # chart
 ################################################################################
-STACK="kube-state-metrics"
-CHART="sample-charts/kube-state-metrics"
+STACK="bke-cluster-log"
+CHART="sample-charts/bke-cluster-log"
 NAMESPACE="bke-obs-stack"
 
 if [ -z "${MP_KUBERNETES}" ]; then
     # use local version of values.yml
     ROOT_DIR=$(git rev-parse --show-toplevel)
-    values="$ROOT_DIR/stacks/kube-state-metrics/values.yml"
+    values="$ROOT_DIR/stacks/bke-cluster-log/values.yml"
 else
     # use github hosted master version of values.yml
-  values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/$REPO_ENV/bke-kube-state-metrics/values.yml"
+  values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/$REPO_ENV/bke-cluster-log/values.yml"
 fi
 
 helm upgrade "$STACK" "$CHART" \
