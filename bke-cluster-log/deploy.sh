@@ -13,7 +13,7 @@ helm repo update > /dev/null
 ################################################################################
 STACK="bke-cluster-log"
 CHART="sample-charts/bke-cluster-log"
-CHART_VERSION="0.1.01"
+CHART_VERSION="1.0.1"
 NAMESPACE="bke-cluster-log"
 REPO_ENV=$APPLICATION_ENV
 
