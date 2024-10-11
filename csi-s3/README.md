@@ -10,10 +10,7 @@
 
 ## Sở đồ k8s-csi-s3
 
-The following diagram shows how k8s-csi-s3 works on a DigitalOcean Kubernetes cluster (DOKS) (based on the example used in the getting started section):
-
 <img src="assets/images/csi-s3.png" alt="csi-s3Diagram">
-
 
 ## Hướng dẫn sử dụng
 
