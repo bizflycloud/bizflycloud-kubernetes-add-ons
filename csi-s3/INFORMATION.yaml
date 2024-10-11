@@ -1,0 +1,8 @@
+{
+  type: "csi-s3",
+  name: "Kubernetes CSI S3 Storage",
+  version: "v1.0.0",
+  short_description: "Kubernetes CSI S3 Storage cho phép sử dụng Simple Storage như một Volume trong Kubernetes",
+  icon_url: "https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/staging/csi-s3/images/images.svg",
+  catalog: "Storage"
+}
