@@ -4,43 +4,36 @@ Victoria Metrics Operator là một dự án mã nguồn mở được phát tri
 
 # Tác dụng của Victoria Metrics Operator
 
-- Triển khai và quản lý Victoria Metrics: Victoria Metrics Operator giúp tự động hóa việc triển khai và quản lý Victoria Metrics trên môi trường Kubernetes.
-
-- Tối ưu hóa việc triển khai và vận hành: Nó cung cấp các tùy chọn cấu hình linh hoạt để tối ưu hóa việc triển khai và vận hành của Victoria Metrics trên Kubernetes.
-
-- Tích hợp với Kubernetes: Victoria Metrics Operator tích hợp chặt chẽ với Kubernetes, cho phép quản lý Victoria Metrics dễ dàng thông qua Kubernetes API.
+- Triển khai và quản lý Victoria Metrics: Tự động hóa việc triển khai và quản lý Victoria Metrics trên môi trường Kubernetes.
+- Tối ưu hóa việc triển khai và vận hành: Cung cấp các tùy chọn cấu hình linh hoạt cho Victoria Metrics trên Kubernetes.
+- Tích hợp với Kubernetes: Quản lý Victoria Metrics dễ dàng thông qua Kubernetes CRD (`VMCluster`, `VMAgent`).
 
 # Hướng dẫn cài đặt Victoria Metrics Operator
 
-## Bước 1: Tạo namespace cho Victoria Metrics Operator
+## Bước 1: Cài đặt Victoria Metrics Operator
 
-Sử dụng lệnh sau để tạo namespace vmoperator:
-
-```bash
-kubectl create namespace vmoperator
-```
-
-## Bước 2: Cài đặt Victoria Metrics Operator
-
-Sử dụng Helm để cài đặt Victoria Metrics Operator
+Sử dụng Helm để cài đặt:
 
 ```bash
-helm repo add victoria-metrics https://victoriametrics.github.io/helm-charts/
+helm repo add vm https://victoriametrics.github.io/helm-charts/
 helm repo update
-helm install vmoperator victoria-metrics/victoria-metrics-operator --namespace vmoperator
+helm upgrade --install vmoperator vm/victoria-metrics-operator \
+  --namespace vmoperator \
+  --create-namespace \
+  --version 0.38.0
 ```
 
-## Bước 3: Kiểm tra trạng thái của Victoria Metrics Operator
+## Bước 2: Khởi tạo cụm VictoriaMetrics Cluster
 
-Để kiểm tra trạng thái của Victoria Metrics Operator, sử dụng lệnh sau:
+Sau khi cài đặt operator, triển khai cụm VictoriaMetrics:
 
 ```bash
-    kubectl get pods -n vmoperator
-    kubectl get services
+kubectl apply -n vmoperator -f manifests/vmcluster.yaml
 ```
 
-## Bước 4: Sử dụng Victoria Metrics Operator
+## Bước 3: Kiểm tra trạng thái
 
-Cấu hình và sử dụng Victoria Metrics Operator:
-
-- Sau khi cài đặt, bạn có thể cấu hình và sử dụng Victoria Metrics Operator để quản lý Victoria Metrics trên môi trường Kubernetes của bạn.
+```bash
+kubectl get pods -n vmoperator
+kubectl get vmcluster,vmagent -n vmoperator
+```

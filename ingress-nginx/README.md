@@ -10,33 +10,49 @@ NGINX Ingress Controller là một phần mềm mã nguồn mở được sử d
 
 # Hướng dẫn cài đặt NGINX Ingress Controller
 
-## Bước 1: Tạo namespace cho NGINX Ingress Controller
-
-Sử dụng lệnh sau để tạo namespace ingress-nginx:
-
-```bash
-kubectl create namespace ingress-nginx
-```
-
-## Bước 2: Cài đặt NGINX Ingress Controller
+## Bước 1: Cài đặt qua Add-on Script hoặc Helm
 
 Sử dụng Helm để cài đặt NGINX Ingress Controller:
 
 ```bash
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-helm install ingress-nginx ingress-nginx/ingress-nginx --namespace ingress-nginx
+helm repo update
+helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx \
+  --namespace ingress-nginx \
+  --create-namespace \
+  --version 4.12.1
 ```
 
-## Bước 3: Kiểm tra trạng thái của NGINX Ingress Controller
+## Bước 2: Kiểm tra trạng thái của NGINX Ingress Controller
 
 Để kiểm tra trạng thái của NGINX Ingress Controller, sử dụng lệnh sau:
 
 ```bash
 kubectl get pods -n ingress-nginx
+kubectl get svc -n ingress-nginx
 ```
 
-## Bước 4: Sử dụng NGINX Ingress Controller
+## Bước 3: Sử dụng NGINX Ingress Controller
 
-Sau khi cài đặt thành công, bạn có thể bắt đầu sử dụng NGINX Ingress Controller để quản lý traffic và điều hướng requests trong Kubernetes cluster. Bạn có thể tạo các Ingress resources để cấu hình rules cho việc điều hướng traffic.
+Sau khi cài đặt thành công, bạn có thể tạo tài nguyên Ingress để định tuyến truy cập tới service của bạn:
 
-Đó là hướng dẫn cài đặt và sử dụng NGINX Ingress Controller. Nếu bạn cần thêm thông tin hoặc gặp vấn đề trong quá trình cài đặt, hãy tham khảo tài liệu chính thức của NGINX Ingress Controller hoặc cộng đồng Kubernetes để được hỗ trợ.
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: demo-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: demo.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: demo-service
+            port:
+              number: 80
+```

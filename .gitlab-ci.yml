@@ -1,0 +1,28 @@
+stages:
+  - lint
+  - test
+
+variables:
+  PYTHONUNBUFFERED: "1"
+
+default:
+  image: alpine:3.19
+  before_script:
+    - apk add --no-cache bash shfmt python3 py3-pip py3-yaml curl git
+
+lint:shell:
+  stage: lint
+  script:
+    - find . -maxdepth 3 -name "*.sh" -exec /bin/sh -n {} +
+    - echo "Shell syntax check passed"
+
+validate:addons:
+  stage: test
+  script:
+    - chmod +x ./validate-addons.sh
+    - ./validate-addons.sh
+
+sync:check:
+  stage: test
+  script:
+    - python3 scripts/sync_latest_addons.py --check-only

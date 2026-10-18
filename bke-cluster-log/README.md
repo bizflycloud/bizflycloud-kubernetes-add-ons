@@ -1,11 +1,28 @@
-# Lorem ipsum dolor sit amet
+# BKE Cluster Log
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed egestas odio vel scelerisque blandit. Aliquam facilisis, lacus in tincidunt sollicitudin, nisi neque tempus eros, ac tempor ipsum nunc id odio. Mauris vel elementum erat. Phasellus feugiat elementum dui quis gravida. Vivamus porta fringilla odio, sed pretium dolor tristique eget. Morbi eget lorem ex. Quisque sit amet enim quam. Maecenas accumsan lobortis felis, et mattis dui iaculis at.
+BKE Cluster Log là tiện ích nội bộ (Internal Add-on) của BizFly Kubernetes Engine (BKE) phục vụ việc thu thập, xử lý và chuyển tiếp logs từ các thành phần hệ thống và workload của khách hàng về hạ tầng giám sát tập trung.
 
-# In hendrerit elit ac blandit aliquet
+## Tính Năng Chính
 
-Suspendisse sed magna molestie, rutrum massa ac, scelerisque sem. Morbi lacinia imperdiet sollicitudin. Duis fringilla suscipit turpis, et ornare massa convallis quis. Ut eu ex enim. Cras quam urna, faucibus sed mauris eget, ultricies pharetra lectus. Morbi aliquet efficitur est, eu dignissim mauris condimentum nec. Vivamus ultrices tempor maximus. Aliquam sodales aliquam imperdiet. Sed id libero eros. Sed cursus suscipit tortor. Praesent nec nulla libero.
+- Tự động phát hiện và thu thập stdout/stderr container logs trên toàn bộ các node thuộc cụm BKE.
+- Bổ sung siêu dữ liệu (Kubernetes metadata: namespace, pod, container, labels).
+- Chuyển tiếp tin cậy về giải pháp logging tập trung của BizFly Cloud.
 
-# Donec ut augue non nisl vestibulum sollicitudin vitae ac ante. Mauris eu augue urna
+## Cài Đặt
 
-Cras pretium interdum hendrerit. In nec pellentesque arcu. Nullam bibendum condimentum dolor, a tristique nisi placerat in. Aliquam pharetra nibh quis sapien aliquam aliquet. Duis tempor ex sed feugiat malesuada. Sed augue dui, venenatis ultricies porttitor ut, viverra sed nulla.
+Tiện ích này thường được khởi tạo tự động bởi `bke-orchestrator`. Bạn cũng có thể nâng cấp thủ công:
+
+```bash
+helm repo add sample-charts https://lmq1999.github.io/sample-chart/
+helm repo update
+helm upgrade --install bke-cluster-log sample-charts/bke-cluster-log \
+  --namespace bke-cluster-log \
+  --create-namespace \
+  --version 1.0.1
+```
+
+## Kiểm Tra Hoạt Động
+
+```bash
+kubectl get pods -n bke-cluster-log
+```

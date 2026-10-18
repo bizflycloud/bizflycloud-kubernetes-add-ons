@@ -1,5 +1,4 @@
 #!/bin/sh
-
 set -e
 
 ################################################################################
@@ -8,7 +7,5 @@ set -e
 STACK="wordpress-kubernetes"
 NAMESPACE="wordpress-kubernetes"
 
-
-helm uninstall "$STACK" \
-  --namespace "$NAMESPACE"
+helm uninstall "$STACK" --namespace "$NAMESPACE" 2>/dev/null || true
 kubectl delete --ignore-not-found=true namespace "$NAMESPACE"

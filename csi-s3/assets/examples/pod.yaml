@@ -5,13 +5,13 @@ metadata:
   namespace: default
 spec:
   containers:
-   - name: csi-s3-test-nginx
-     image: nginx
-     volumeMounts:
-       - mountPath: /usr/share/nginx/html/s3
-         name: webroot
+    - name: csi-s3-test-nginx
+      image: nginx
+      volumeMounts:
+        - mountPath: /usr/share/nginx/html/s3
+          name: webroot
   volumes:
-   - name: webroot
-     persistentVolumeClaim:
-       claimName: csi-s3-pvc
-       readOnly: false
+    - name: webroot
+      persistentVolumeClaim:
+        claimName: csi-s3-pvc
+        readOnly: false

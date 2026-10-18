@@ -1,8 +1,7 @@
-{
-  type: "bke-cluster-log",
-  name: "BKE Cluster Log",
-  version: "Latest",
-  short_description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed egestas odio vel scelerisque blandit",
-  icon_url: "https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/main/{{CHART_NAME}}/images/images.svg",
-  catalog: "BKE"
-}
+type: bke-cluster-log
+name: BKE Cluster Log
+version: 1.0.1
+short_description: BKE Cluster Log là tiện ích nội bộ thu thập và chuyển tiếp log hệ thống cho cụm BizFly Kubernetes Engine
+icon_url: https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/main/bke-cluster-log/images/images.svg
+catalog: BKE
+internal: true

@@ -1,0 +1,41 @@
+image:
+  repository: cr-hn-1.bizflycloud.vn/31ff9581861a4d0ea4df5e7dda0f665d/karpenter-provider-bizflycloud
+  tag: v1.2.2-beta.1
+  pullPolicy: IfNotPresent
+
+bizflycloud:
+  apiUrl: https://manage.bizflycloud.vn/api
+  region: HN
+  appCredId: ""
+  appCredSecret: ""
+  projectId: ""
+  authMethod: application_credential
+
+cluster:
+  id: ""
+  token: ""
+  joinEndpoint: ""
+  logEndpoint: ""
+  kubernetesVersion: ""
+  networkId: ""
+  sshKeyName: ""
+
+nodeClass:
+  create: true
+  name: default
+  diskTypes:
+    - HDD
+    - SSD
+  rootDiskSize: 40
+  zones:
+    - HN1
+    - HN2
+
+nodePool:
+  create: true
+  name: default
+  maxNodes: 20
+  categories:
+    - basic
+    - premium
+    - enterprise
