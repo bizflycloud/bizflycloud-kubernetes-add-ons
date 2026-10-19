@@ -11,6 +11,10 @@ spec:
   diskTypes:
     {{- toYaml .Values.nodeClass.diskTypes | nindent 4 }}
   rootDiskSize: {{ .Values.nodeClass.rootDiskSize }}
+  {{- if .Values.nodeClass.nodeCategories }}
+  nodeCategories:
+    {{- toYaml .Values.nodeClass.nodeCategories | nindent 4 }}
+  {{- end }}
   {{- if .Values.cluster.networkId }}
   vpcNetworkIds:
   - {{ .Values.cluster.networkId }}

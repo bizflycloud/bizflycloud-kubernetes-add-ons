@@ -30,6 +30,8 @@ nodeClass:
   zones:
     - HN1
     - HN2
+  # nodeCategories: [] means all categories (basic, premium, enterprise, dedicated)
+  nodeCategories: []
 
 nodePool:
   create: true
