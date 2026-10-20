@@ -1,8 +1,6 @@
-{
-  type: "cert-manager",
-  name: "Cert-manager",
-  version: "latest",
-  short_description: "Cert-manager là một công cụ quản lý vòng đời chứng chỉ (TLS/SSL) cho các cụm Kubernetes",
-  icon_url: "https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/staging/cert-manager/images/images.svg",
-  catalog: "Network"
-}
+type: cert-manager
+name: Cert-manager
+version: v1.16.3
+short_description: Cert-manager là một công cụ quản lý vòng đời chứng chỉ (TLS/SSL) tự động cho Kubernetes
+icon_url: https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/main/cert-manager/images/images.svg
+catalog: Network

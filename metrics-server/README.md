@@ -6,28 +6,22 @@ Kubernetes Metrics Server là một thành phần quan trọng trong hệ thốn
 
 - Thu thập và lưu trữ thông tin về tài nguyên sử dụng của các container và pod.
 - Cung cấp dữ liệu về CPU và memory usage để theo dõi hiệu suất hoạt động của ứng dụng.
-- Hỗ trợ trong việc điều chỉnh tài nguyên cho các pod để tối ưu hiệu suất và sử dụng tài nguyên hiệu quả.
+- Hỗ trợ trong việc điều chỉnh tài nguyên cho Horizontal Pod Autoscaler (HPA).
 
 # Hướng dẫn cài đặt Kubernetes Metrics Server
 
-## Bước 1: Tạo namespace cho Kubernetes Metrics Server
-
-Sử dụng lệnh sau để tạo namespace metrics-server:
+## Bước 1: Cài đặt Metrics Server bằng Helm
 
 ```bash
-kubectl create ns metrics-server
+helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server
+helm repo update
+helm upgrade --install metrics-server metrics-server/metrics-server \
+  --namespace metrics-server \
+  --create-namespace \
+  --version 3.12.2
 ```
 
-## Bước 2: Cài đặt Metrics Server
-
-
-Sử dụng Helm để cài đặt Kubernetes Metrics Server:
-
-```bash
-helm install metrics-server metrics-server/metrics-server --namespace metrics-server
-```
-
-## Bước 3: Kiểm tra cài đặt metrics server
+## Bước 2: Kiểm tra cài đặt metrics server
 
 Kiểm tra trạng thái của Metrics Server bằng lệnh:
 
@@ -35,15 +29,9 @@ Kiểm tra trạng thái của Metrics Server bằng lệnh:
 kubectl get deployment metrics-server -n metrics-server
 ```
 
-## Bước 4: Kiểm tra Metrics Server hoạt động
-
-Để kiểm tra Metrics Server hoạt động đúng, sử dụng lệnh sau:
+## Bước 3: Kiểm tra Metrics Server hoạt động
 
 ```bash
-kubectl top nodes -n metrics-server
-kubectl top pods -n metrics-server
+kubectl top nodes
+kubectl top pods -A
 ```
-
-Nếu bạn nhận được dữ liệu về tài nguyên sử dụng của nodes và pods, có nghĩa là Metrics Server đã được cài đặt và hoạt động thành công.
-
-Đó là hướng dẫn cài đặt và sử dụng Kubernetes Metrics Server. Nếu bạn gặp bất kỳ vấn đề nào trong quá trình cài đặt, hãy tham khảo tài liệu chính thức của Kubernetes hoặc cộng đồng Kubernetes để được hỗ trợ.

@@ -1,46 +1,37 @@
-# Giới thiệu về Prometheus
+# Giới thiệu về Kube-Prometheus Stack
 
-Prometheus là một dự án mã nguồn mở được sử dụng rộng rãi để giám sát hệ thống và ứng dụng. Nó cung cấp các công cụ và thư viện để thu thập, lưu trữ và truy vấn dữ liệu metrics từ các ứng dụng chạy trên cụm hệ thống.
+Kube-Prometheus Stack là bộ giải pháp giám sát hoàn chỉnh cho Kubernetes, tích hợp Prometheus, Grafana, Alertmanager, Node Exporter và Kube-State-Metrics.
 
-# Tác dụng của Prometheus
+# Tác dụng của Prometheus Stack
 
-- Thu thập metrics: Prometheus có khả năng thu thập metrics từ nhiều nguồn khác nhau như các ứng dụng, server và dịch vụ.
+- Thu thập metrics toàn diện từ tầng Node, Pod, Control Plane đến tầng ứng dụng.
+- Cung cấp sẵn hệ thống Dashboard Grafana phong phú để trực quan hóa dữ liệu.
+- Quản lý luật cảnh báo (Alerting Rules) thông qua Prometheus Operator CRDs (`PrometheusRule`, `ServiceMonitor`, `PodMonitor`).
 
-- Giám sát hệ thống và ứng dụng: Prometheus cho phép giám sát và theo dõi hiệu suất và trạng thái của các ứng dụng và hệ thống, từ đó giúp phát hiện và giải quyết các vấn đề hoạt động và hiệu suất.
+# Hướng dẫn cài đặt Kube-Prometheus Stack
 
-- Báo cáo và cảnh báo: Prometheus cung cấp các công cụ để tạo ra báo cáo và cảnh báo dựa trên các ngưỡng và quy tắc cấu hình.
-
-# Hướng dẫn cài đặt Prometheus
-
-## Bước 1: Tạo namespace cho Prometheus
-
-Sử dụng lệnh sau để tạo namespace prometheus:
-
-```bash
-kubectl create namespace prometheus
-```
-
-## Bước 2: Cài đặt Prometheus
-
-Sử dụng Helm để cài đặt Prometheus:
+## Bước 1: Cài đặt Kube-Prometheus Stack bằng Helm
 
 ```bash
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
-helm install prometheus prometheus-community/prometheus
+helm upgrade --install kube-prometheus prometheus-community/kube-prometheus-stack \
+  --namespace kube-prometheus \
+  --create-namespace \
+  --version 69.8.2
 ```
 
-## Bước 3: Kiểm tra trạng thái của Prometheus
-
-Để kiểm tra trạng thái của Prometheus, sử dụng lệnh sau:
+## Bước 2: Kiểm tra trạng thái của Prometheus Stack
 
 ```bash
-kubectl get pods -n prometheus
-kubectl get services -n prometheus
+kubectl get pods -n kube-prometheus
+kubectl get svc -n kube-prometheus
 ```
 
-## Bước 4: Sử dụng Prometheus
+## Bước 3: Truy cập Grafana Dashboard
 
-Truy cập giao diện đồ họa của Prometheus:
+```bash
+kubectl port-forward svc/kube-prometheus-grafana -n kube-prometheus 3000:80
+```
 
-- Mặc định, Prometheus cài đặt một giao diện đồ họa trên cổng 9090. Bạn có thể truy cập vào giao diện đồ họa này thông qua trình duyệt web.
+Truy cập <http://localhost:3000> (Mặc định tài khoản: `admin` / `prom-operator`).

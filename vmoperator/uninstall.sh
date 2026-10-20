@@ -1,5 +1,4 @@
 #!/bin/sh
-
 set -e
 
 ################################################################################
@@ -7,12 +6,11 @@ set -e
 ################################################################################
 STACK="vmoperator"
 NAMESPACE="vmoperator"
-script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-VMCLUSTER="${script_dir}/values.yml"
-kubectl delete -n "$NAMESPACE" -f "$VMCLUSTER"
+script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 
-helm uninstall "$STACK" \
-  --namespace "$NAMESPACE"
+if [ -f "${script_dir}/manifests/vmcluster.yaml" ]; then
+  kubectl delete --ignore-not-found=true -n "$NAMESPACE" -f "${script_dir}/manifests/vmcluster.yaml"
+fi
 
-
+helm uninstall "$STACK" --namespace "$NAMESPACE" 2>/dev/null || true
 kubectl delete --ignore-not-found=true namespace "$NAMESPACE"

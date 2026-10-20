@@ -1,5 +1,4 @@
 #!/bin/sh
-
 set -e
 
 if ! [ -x "$(command -v uname)" ]; then
@@ -37,20 +36,23 @@ if [ -z "${NAMESPACE}" ]; then
   exit 1
 fi
 
-ROOT_DIR=$(git rev-parse --show-toplevel)
+script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+ROOT_DIR="$script_dir"
 
 # create stack directory
 NEW_DIR_PATH="$ROOT_DIR/$STACK_NAME"
 mkdir -p "$NEW_DIR_PATH"
 
-# copy files
+# copy template files
 cp -r "$ROOT_DIR"/stack/* "$NEW_DIR_PATH"
 
 UNAME=$(uname)
 
-for file in "$NEW_DIR_PATH"/*
-do
-  if [ "$UNAME" = "Darwin" ] ; then
+for file in "$NEW_DIR_PATH"/*; do
+  # Skip subdirectories (e.g. images, assets)
+  [ -f "$file" ] || continue
+
+  if [ "$UNAME" = "Darwin" ]; then
     sed -i '' "s,{{HELM_REPO_NAME}},$HELM_REPO_NAME,g" "$file"
     sed -i '' "s,{{HELM_REPO_URL}},$HELM_REPO_URL,g" "$file"
     sed -i '' "s,{{STACK_NAME}},$STACK_NAME,g" "$file"

@@ -1,0 +1,31 @@
+{{- if .Values.nodeClass.create }}
+apiVersion: karpenter.bizflycloud.com/v1
+kind: BizflyCloudNodeClass
+metadata:
+  name: {{ .Values.nodeClass.name }}
+spec:
+  region: {{ .Values.bizflycloud.region }}
+  zones:
+    {{- toYaml .Values.nodeClass.zones | nindent 4 }}
+  template: Ubuntu 24.04 LTS
+  diskTypes:
+    {{- toYaml .Values.nodeClass.diskTypes | nindent 4 }}
+  rootDiskSize: {{ .Values.nodeClass.rootDiskSize }}
+  {{- if .Values.nodeClass.nodeCategories }}
+  nodeCategories:
+    {{- toYaml .Values.nodeClass.nodeCategories | nindent 4 }}
+  {{- end }}
+  {{- if .Values.cluster.networkId }}
+  vpcNetworkIds:
+  - {{ .Values.cluster.networkId }}
+  {{- end }}
+  networkPlans:
+  - free_datatransfer
+  - free_bandwidth
+  {{- if .Values.cluster.sshKeyName }}
+  sshKeyName: {{ .Values.cluster.sshKeyName }}
+  {{- end }}
+  tags:
+  - karpenter-managed=true
+  - cluster-id={{ .Values.cluster.id }}
+{{- end }}

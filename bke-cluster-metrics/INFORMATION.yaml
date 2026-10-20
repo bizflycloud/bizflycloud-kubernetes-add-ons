@@ -1,8 +1,7 @@
-{
-  type: "bke-cluster-metrics",
-  name: BKE Cluster Metrics",
-  version: "Latest",
-  short_description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed egestas odio vel scelerisque blandit",
-  icon_url: "https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/main/{{CHART_NAME}}/images/images.svg",
-  catalog: "BKE"
-}
+type: bke-cluster-metrics
+name: BKE Cluster Metrics
+version: 1.0.3
+short_description: BKE Cluster Metrics là tiện ích nội bộ thu thập và giám sát số liệu hiệu năng nút và cụm cho BKE
+icon_url: https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/main/bke-cluster-metrics/images/images.svg
+catalog: BKE
+internal: true

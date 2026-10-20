@@ -1,1 +1,4 @@
-# kubearmor/kubearmor-operator
+# Helm values for kubearmor/kubearmor-operator
+# Ref: https://github.com/kubearmor/charts
+
+autoDeploy: true

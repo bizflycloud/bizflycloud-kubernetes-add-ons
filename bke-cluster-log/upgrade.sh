@@ -1,29 +1,40 @@
 #!/bin/sh
-
 set -e
 
 ################################################################################
 # repo
 ################################################################################
 helm repo add sample-charts https://lmq1999.github.io/sample-chart/
-helm repo update > /dev/null
+helm repo update >/dev/null 2>&1
 
 ################################################################################
 # chart
 ################################################################################
 STACK="bke-cluster-log"
 CHART="sample-charts/bke-cluster-log"
+CHART_VERSION="1.0.1"
 NAMESPACE="bke-cluster-log"
 
-if [ -z "${MP_KUBERNETES}" ]; then
-    # use local version of values.yml
-    ROOT_DIR=$(git rev-parse --show-toplevel)
-    values="$ROOT_DIR/stacks/bke-cluster-log/values.yml"
-else
-    # use github hosted master version of values.yml
-  values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/$REPO_ENV/bke-cluster-log/values.yml"
+script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+values="${script_dir}/values.yml"
+
+guard_script="${script_dir}/../scripts/upgrade_guard.sh"
+if [ ! -f "$guard_script" ]; then
+  guard_script="${script_dir}/scripts/upgrade_guard.sh"
 fi
 
-helm upgrade "$STACK" "$CHART" \
---namespace "$NAMESPACE" \
---values "$values" \
+if [ -f "$guard_script" ]; then
+  . "$guard_script"
+  run_guarded_helm_upgrade "$@"
+else
+  helm upgrade "$STACK" "$CHART" \
+    --atomic \
+    --create-namespace \
+    --install \
+    --timeout 5m0s \
+    --namespace "$NAMESPACE" \
+    --values "$values" \
+    --version "$CHART_VERSION" \
+    "$@"
+
+fi

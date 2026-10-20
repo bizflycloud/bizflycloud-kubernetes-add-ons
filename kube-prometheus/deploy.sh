@@ -1,36 +1,29 @@
 #!/bin/sh
-
 set -e
 
 ################################################################################
 # repo
 ################################################################################
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-helm repo update > /dev/null
+helm repo update >/dev/null 2>&1
 
 ################################################################################
 # chart
 ################################################################################
 STACK="kube-prometheus"
 CHART="prometheus-community/kube-prometheus-stack"
-CHART_VERSION="55.7.0"
+CHART_VERSION="69.8.2"
 NAMESPACE="kube-prometheus"
-REPO_ENV=$APPLICATION_ENV
 
-if [ -z "${MP_KUBERNETES}" ]; then
-  # use local version of values.yml
-  script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-  values="${script_dir}/values.yml"
-else
-  # use github hosted master version of values.yml
-  values="https://raw.githubusercontent.com/bizflycloud/bizflycloud-kubernetes-add-ons/$REPO_ENV/kube-prometheus/values.yml"
-fi
+script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+values="${script_dir}/values.yml"
 
 helm upgrade "$STACK" "$CHART" \
   --atomic \
   --create-namespace \
   --install \
-  --timeout 10m0s\
+  --timeout 10m0s \
   --namespace "$NAMESPACE" \
   --values "$values" \
-  --version "$CHART_VERSION"
+  --version "$CHART_VERSION" \
+  "$@"

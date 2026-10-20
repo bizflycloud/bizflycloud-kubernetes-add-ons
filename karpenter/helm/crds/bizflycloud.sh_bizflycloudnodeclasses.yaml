@@ -1,0 +1,208 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.15.0
+  name: bizflycloudnodeclasses.karpenter.bizflycloud.com
+spec:
+  group: karpenter.bizflycloud.com
+  names:
+    categories:
+    - karpenter
+    kind: BizflyCloudNodeClass
+    listKind: BizflyCloudNodeClassList
+    plural: bizflycloudnodeclasses
+    shortNames:
+    - bizflycloudnc
+    - bizflycloudncs
+    singular: bizflycloudnodeclass
+  scope: Cluster
+  versions:
+  - name: v1
+    served: true
+    storage: true
+    subresources:
+      status: {}
+    additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=="Ready")].status
+      name: Ready
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: Age
+      type: date
+    - jsonPath: .spec.nodeCategories
+      name: Categories
+      priority: 1
+      type: string
+    - jsonPath: .spec.cpuVendors
+      name: CPU Vendors
+      priority: 1
+      type: string
+    schema:
+      openAPIV3Schema:
+        description: BizflyCloudNodeClass is the Schema for the BizflyCloudNodeClass API
+        properties:
+          apiVersion:
+            description: APIVersion defines the versioned schema of this representation of an object.
+            type: string
+          kind:
+            description: Kind is a string value representing the REST resource this object represents.
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: BizflyCloudNodeClassSpec defines the desired state of BizflyCloudNodeClass
+            properties:
+              cpuVendors:
+                description: CPUVendors specifies the CPU vendors to use (e.g., Intel2, AMD4)
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - Intel2
+                  - AMD4
+              diskTypes:
+                description: DiskTypes specifies the types of disks to use (e.g., ["SSD", "HDD"]).
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - SSD
+                  - HDD
+              metadataOptions:
+                default:
+                  type: template
+                description: MetadataOptions for the generated launch template of provisioned nodes.
+                properties:
+                  type:
+                    type: string
+                required:
+                - type
+                type: object
+              networkPlans:
+                description: NetworkPlans specifies the list of network plans for the instances.
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - free_datatransfer
+                  - free_bandwidth
+              nodeCategories:
+                description: NodeCategories specifies the categories of nodes to provision.
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - basic
+                  - premium
+                  - enterprise
+                  - dedicated
+              osType:
+                description: OSType specifies the operating system for the nodes (flatcar or ubuntu)
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - flatcar
+                  - ubuntu
+              placementStrategy:
+                description: PlacementStrategy defines how nodes should be placed across zones
+                properties:
+                  spread:
+                    properties:
+                      zones:
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                type: object
+              region:
+                type: string
+              rootDiskSize:
+                default: 40
+                description: RootDiskSize specifies the size of the root disk in GB
+                maximum: 1000
+                minimum: 20
+                type: integer
+              securityGroups:
+                description: SecurityGroups to apply to the VMs
+                items:
+                  properties:
+                    securityGroupID:
+                      type: string
+                  required:
+                  - securityGroupID
+                  type: object
+                maxItems: 10
+                type: array
+              sshKeyName:
+                description: SSHKeyName is the name of the SSH key pair to use for instances
+                type: string
+              sshKeys:
+                description: SSHKeys is a list of SSH public keys to inject into instances
+                items:
+                  type: string
+                type: array
+              tags:
+                description: Tags to apply to the VMs
+                items:
+                  type: string
+                type: array
+              template:
+                description: Template is the name of the template to use for nodes
+                type: string
+              vpcNetworkIds:
+                description: VPCNetworkIDs is the list of VPC network IDs to attach to the nodes
+                items:
+                  type: string
+                type: array
+              zones:
+                description: Zones is the list of availability zones where nodes can be created.
+                items:
+                  type: string
+                type: array
+            required:
+            - template
+            type: object
+          status:
+            description: BizflyCloudNodeClassStatus defines the observed state of BizflyCloudNodeClass
+            properties:
+              conditions:
+                description: Conditions represents the latest available observations
+                items:
+                  properties:
+                    lastTransitionTime:
+                      format: date-time
+                      type: string
+                    message:
+                      type: string
+                    observedGeneration:
+                      format: int64
+                      type: integer
+                    reason:
+                      type: string
+                    status:
+                      type: string
+                    type:
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - message
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+              instanceTypes:
+                items:
+                  type: string
+                type: array
+              lastUpdated:
+                format: date-time
+                type: string
+              regions:
+                items:
+                  type: string
+                type: array
+            type: object
+        type: object

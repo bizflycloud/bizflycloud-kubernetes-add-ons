@@ -1,0 +1,47 @@
+stages:
+  - lint
+  - test
+
+variables:
+  PYTHONUNBUFFERED: "1"
+
+default:
+  image: alpine:3.19
+  before_script:
+    - apk add --no-cache bash shfmt python3 py3-pip py3-yaml curl git
+
+lint:shell:
+  stage: lint
+  script:
+    - find . -maxdepth 3 -name "*.sh" -exec /bin/sh -n {} +
+    - echo "Shell syntax check passed"
+
+validate:addons:
+  stage: test
+  script:
+    - chmod +x ./validate-addons.sh
+    - ./validate-addons.sh
+
+validate:helm:
+  stage: test
+  before_script:
+    - apk add --no-cache curl bash
+    - curl -fsSL https://get.helm.sh/helm-v3.16.3-linux-amd64.tar.gz | tar -xz
+    - mv linux-amd64/helm /usr/local/bin/helm
+  script:
+    - helm lint karpenter/helm/
+    - helm template test karpenter/helm/
+        --set bizflycloud.apiUrl=https://manage.bizflycloud.vn
+        --set bizflycloud.region=HN
+        --set cluster.id=ci-test
+        --set cluster.kubernetesVersion=1.36
+        --set cluster.networkId=net-ci
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == "main"'
+
+sync:check:
+  stage: test
+  script:
+    - python3 scripts/sync_latest_addons.py --check-only
+

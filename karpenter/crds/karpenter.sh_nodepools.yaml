@@ -1,0 +1,194 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.15.0
+  name: nodepools.karpenter.sh
+spec:
+  group: karpenter.sh
+  names:
+    categories:
+    - karpenter
+    kind: NodePool
+    listKind: NodePoolList
+    plural: nodepools
+    shortNames:
+    - np
+    - nps
+    singular: nodepool
+  scope: Cluster
+  versions:
+  - name: v1
+    served: true
+    storage: true
+    subresources:
+      status: {}
+    additionalPrinterColumns:
+    - jsonPath: .spec.template.spec.nodeClassRef.name
+      name: NodeClass
+      type: string
+    - jsonPath: .status.resources.cpu
+      name: CPU
+      type: string
+    - jsonPath: .status.resources.memory
+      name: Memory
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: Age
+      type: date
+    schema:
+      openAPIV3Schema:
+        description: NodePool is the Schema for the NodePool API
+        type: object
+        properties:
+          apiVersion:
+            type: string
+          kind:
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: NodePoolSpec defines the desired state of NodePool
+            type: object
+            required:
+            - template
+            properties:
+              disruption:
+                type: object
+                properties:
+                  budgets:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        nodes:
+                          type: string
+                        reasons:
+                          type: array
+                          items:
+                            type: string
+                  consolidateAfter:
+                    type: string
+                  consolidationPolicy:
+                    type: string
+              limits:
+                type: object
+                additionalProperties:
+                  anyOf:
+                  - type: integer
+                  - type: string
+                  x-kubernetes-int-or-string: true
+              template:
+                type: object
+                required:
+                - spec
+                properties:
+                  metadata:
+                    type: object
+                    properties:
+                      annotations:
+                        type: object
+                        additionalProperties:
+                          type: string
+                      labels:
+                        type: object
+                        additionalProperties:
+                          type: string
+                  spec:
+                    type: object
+                    required:
+                    - nodeClassRef
+                    - requirements
+                    properties:
+                      expireAfter:
+                        type: string
+                      nodeClassRef:
+                        type: object
+                        required:
+                        - group
+                        - kind
+                        - name
+                        properties:
+                          group:
+                            type: string
+                          kind:
+                            type: string
+                          name:
+                            type: string
+                      requirements:
+                        type: array
+                        items:
+                          type: object
+                          required:
+                          - key
+                          - operator
+                          properties:
+                            key:
+                              type: string
+                            operator:
+                              type: string
+                            values:
+                              type: array
+                              items:
+                                type: string
+                      startupTaints:
+                        type: array
+                        items:
+                          type: object
+                          required:
+                          - key
+                          - effect
+                          properties:
+                            key:
+                              type: string
+                            value:
+                              type: string
+                            effect:
+                              type: string
+                      taints:
+                        type: array
+                        items:
+                          type: object
+                          required:
+                          - key
+                          - effect
+                          properties:
+                            key:
+                              type: string
+                            value:
+                              type: string
+                            effect:
+                              type: string
+                      terminationGracePeriod:
+                        type: string
+          status:
+            description: NodePoolStatus defines the observed state of NodePool
+            type: object
+            properties:
+              conditions:
+                type: array
+                items:
+                  type: object
+                  required:
+                  - type
+                  - status
+                  - lastTransitionTime
+                  properties:
+                    type:
+                      type: string
+                    status:
+                      type: string
+                    lastTransitionTime:
+                      format: date-time
+                      type: string
+                    reason:
+                      type: string
+                    message:
+                      type: string
+              resources:
+                type: object
+                additionalProperties:
+                  anyOf:
+                  - type: integer
+                  - type: string
+                  x-kubernetes-int-or-string: true

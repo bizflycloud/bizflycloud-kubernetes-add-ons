@@ -1,0 +1,36 @@
+name: Addons Validation & Sync Check
+
+on:
+  push:
+    branches: [ main, master, staging ]
+  pull_request:
+    branches: [ main, master ]
+  schedule:
+    # Run daily at 02:00 UTC to check for upstream chart drifts
+    - cron: '0 2 * * *'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Validate Shell Scripts and Add-ons
+        run: |
+          chmod +x ./validate-addons.sh
+          ./validate-addons.sh
+
+      - name: Check Upstream Add-on Drift
+        run: |
+          python3 scripts/sync_latest_addons.py --check-only

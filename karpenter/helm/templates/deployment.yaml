@@ -1,0 +1,113 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: karpenter
+  namespace: karpenter
+  labels:
+    app: karpenter
+    app.kubernetes.io/name: karpenter
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: karpenter
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: karpenter
+        app.kubernetes.io/name: karpenter
+    spec:
+      serviceAccountName: karpenter
+      containers:
+      - name: karpenter
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        env:
+        - name: KARPENTER_LOG_LEVEL
+          value: INFO
+        - name: KARPENTER_CLOUD_PROVIDER
+          value: bizflycloud
+        - name: KARPENTER_CLOUD_PROVIDER_CONFIG_REGION
+          valueFrom:
+            secretKeyRef:
+              name: bizflycloud-credentials
+              key: region
+        - name: KARPENTER_CLOUD_PROVIDER_CONFIG_SECRET_REF_NAME
+          value: bizflycloud-credentials
+        - name: KARPENTER_CLOUD_PROVIDER_CONFIG_SECRET_REF_NAMESPACE
+          value: karpenter
+        - name: KARPENTER_CLOUD_PROVIDER_CONFIG_CLOUD_CONFIG_API_ENDPOINT
+          valueFrom:
+            secretKeyRef:
+              name: bizflycloud-credentials
+              key: api-url
+        - name: BIZFLY_CLOUD_AUTH_METHOD
+          valueFrom:
+            secretKeyRef:
+              name: bizflycloud-credentials
+              key: auth-method
+        - name: BIZFLY_CLOUD_APP_CRED_ID
+          valueFrom:
+            secretKeyRef:
+              name: bizflycloud-credentials
+              key: app-cred-id
+        - name: BIZFLY_CLOUD_APP_CRED_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: bizflycloud-credentials
+              key: app-cred-secret
+        - name: BIZFLY_CLOUD_REGION
+          valueFrom:
+            secretKeyRef:
+              name: bizflycloud-credentials
+              key: region
+        - name: BIZFLY_CLOUD_API_URL
+          valueFrom:
+            secretKeyRef:
+              name: bizflycloud-credentials
+              key: api-url
+        - name: BIZFLY_CLOUD_PROJECT_ID
+          valueFrom:
+            secretKeyRef:
+              name: bizflycloud-credentials
+              key: project-id
+        - name: BKE_CLUSTER_ID
+          valueFrom:
+            secretKeyRef:
+              name: bizflycloud-credentials
+              key: cluster-id
+        - name: BKE_CLUSTER_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: bizflycloud-credentials
+              key: cluster-token
+        - name: BKE_JOIN_ENDPOINT
+          valueFrom:
+            secretKeyRef:
+              name: bizflycloud-credentials
+              key: join-endpoint
+        - name: BKE_LOG_ENDPOINT
+          valueFrom:
+            secretKeyRef:
+              name: bizflycloud-credentials
+              key: log-endpoint
+        - name: BKE_KUBERNETES_VERSION
+          valueFrom:
+            secretKeyRef:
+              name: bizflycloud-credentials
+              key: kubernetes-version
+        - name: KARPENTER_CLOUD_PROVIDER_CONFIG_DRIFT_DETECTION_ENABLED
+          value: "true"
+        resources:
+          requests:
+            cpu: 200m
+            memory: 256Mi
+          limits:
+            cpu: 1000m
+            memory: 1024Mi
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30

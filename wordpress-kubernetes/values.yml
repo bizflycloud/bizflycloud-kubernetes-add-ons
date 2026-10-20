@@ -1,2 +1,10 @@
 # bitnami/wordpress
+# Ref: https://github.com/bitnami/charts/tree/main/bitnami/wordpress
+
+image:
+  tag: 6.7.1
+
 wordpressUsername: admin
+wordpressEmail: user@example.com
+wordpressFirstName: Admin
+wordpressLastName: User
