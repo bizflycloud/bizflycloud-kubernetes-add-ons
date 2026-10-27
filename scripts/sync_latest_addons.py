@@ -23,8 +23,8 @@ ADDONS_CONFIG = {
     "karpenter": {
         "repo": "local",
         "chart": "karpenter",
-        "target_version": "1.4.0",
-        "app_version": "v1.4.0",
+        "target_version": "1.4.1",
+        "app_version": "v1.4.1",
     },
     "vmoperator": {
         "repo": "https://victoriametrics.github.io/helm-charts/",
