@@ -17,3 +17,18 @@ kubectl get nodepools,bizflycloudnodeclasses
 ```
 
 Khi triển khai workload vượt quá tài nguyên hiện tại của cụm, Karpenter sẽ tự động cấp phát Cloud Server mới và đưa vào cụm BKE.
+
+### Tự tạo NodePool trên cụm dùng Cilium
+
+Cilium gắn taint `node.cilium.io/agent-not-ready:NoSchedule` lên node mới cho tới khi agent chạy xong. `NodePool/default` đã tự khai báo taint này trong `startupTaints`. NodePool bạn tự tạo cần khai báo giống vậy, nếu không Karpenter sẽ tạo thừa node:
+
+```yaml
+spec:
+  template:
+    spec:
+      startupTaints:
+        - key: node.cilium.io/agent-not-ready
+          effect: NoSchedule
+```
+
+Cụm dùng kube-router không cần khai báo.

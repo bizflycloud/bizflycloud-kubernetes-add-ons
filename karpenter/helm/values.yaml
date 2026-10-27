@@ -1,6 +1,6 @@
 image:
   repository: cr-hn-1.bizflycloud.vn/31ff9581861a4d0ea4df5e7dda0f665d/karpenter-provider-bizflycloud
-  tag: v1.4.1
+  tag: v1.4.2
   pullPolicy: IfNotPresent
 
 bizflycloud:
@@ -41,3 +41,7 @@ nodePool:
     - basic
     - premium
     - enterprise
+  # Extra taints the node has at boot and a DaemonSet removes later. The Cilium
+  # agent-not-ready taint is added automatically when cilium-config sets
+  # set-cilium-node-taints.
+  startupTaints: []

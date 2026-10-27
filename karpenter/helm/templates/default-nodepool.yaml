@@ -28,6 +28,24 @@ spec:
         kind: BizflyCloudNodeClass
         name: {{ .Values.nodeClass.name }}
       expireAfter: 720h
+      {{- /*
+      The Cilium operator taints a new node with agent-not-ready until the agent
+      runs there. Karpenter only ignores that taint if it is listed as a startup
+      taint; otherwise it sees the pending pods as unschedulable on the node it
+      just launched for them and launches a second one. Clusters on kube-router
+      have no cilium-config, so they get no such taint.
+      */}}
+      {{- $startupTaints := .Values.nodePool.startupTaints | default list }}
+      {{- $ciliumConfig := lookup "v1" "ConfigMap" "kube-system" "cilium-config" }}
+      {{- $ciliumData := $ciliumConfig.data | default dict }}
+      {{- if eq (get $ciliumData "set-cilium-node-taints") "true" }}
+      {{- $ciliumTaintKey := get $ciliumData "agent-not-ready-taint-key" | default "node.cilium.io/agent-not-ready" }}
+      {{- $startupTaints = append $startupTaints (dict "key" $ciliumTaintKey "effect" "NoSchedule") }}
+      {{- end }}
+      {{- with $startupTaints }}
+      startupTaints:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       requirements:
       - key: kubernetes.io/arch
         operator: In
