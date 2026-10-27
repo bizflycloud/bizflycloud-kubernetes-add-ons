@@ -1,6 +1,6 @@
 image:
   repository: cr-hn-1.bizflycloud.vn/31ff9581861a4d0ea4df5e7dda0f665d/karpenter-provider-bizflycloud
-  tag: v1.2.2-beta.1
+  tag: v1.4.0
   pullPolicy: IfNotPresent
 
 bizflycloud:
@@ -30,7 +30,7 @@ nodeClass:
   zones:
     - HN1
     - HN2
-  # nodeCategories: [] means all categories (basic, premium, enterprise, dedicated)
+  # empty: use nodePool.categories (the provider rejects a NodeClass without categories)
   nodeCategories: []
 
 nodePool:

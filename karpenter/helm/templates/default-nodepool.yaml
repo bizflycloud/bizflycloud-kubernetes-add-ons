@@ -33,4 +33,19 @@ spec:
         operator: In
         values:
           {{- toYaml .Values.nodePool.categories | nindent 10 }}
+      # The provider does not register these labels as well-known, so Karpenter
+      # drops every instance type unless the NodePool states them explicitly.
+      - key: karpenter.bizflycloud.com/disk-type
+        operator: In
+        values:
+          {{- toYaml .Values.nodeClass.diskTypes | nindent 10 }}
+      - key: karpenter.bizflycloud.com/cpu-vendor
+        operator: Exists
+      - key: karpenter.bizflycloud.com/os-type
+        operator: In
+        values: ["ubuntu"]
+      - key: topology.kubernetes.io/zone
+        operator: In
+        values:
+          {{- toYaml .Values.nodeClass.zones | nindent 10 }}
 {{- end }}

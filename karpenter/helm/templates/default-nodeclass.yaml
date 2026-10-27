@@ -8,13 +8,13 @@ spec:
   zones:
     {{- toYaml .Values.nodeClass.zones | nindent 4 }}
   template: Ubuntu 24.04 LTS
+  osType:
+  - ubuntu
   diskTypes:
     {{- toYaml .Values.nodeClass.diskTypes | nindent 4 }}
   rootDiskSize: {{ .Values.nodeClass.rootDiskSize }}
-  {{- if .Values.nodeClass.nodeCategories }}
   nodeCategories:
-    {{- toYaml .Values.nodeClass.nodeCategories | nindent 4 }}
-  {{- end }}
+    {{- toYaml (default .Values.nodePool.categories .Values.nodeClass.nodeCategories) | nindent 4 }}
   {{- if .Values.cluster.networkId }}
   vpcNetworkIds:
   - {{ .Values.cluster.networkId }}
