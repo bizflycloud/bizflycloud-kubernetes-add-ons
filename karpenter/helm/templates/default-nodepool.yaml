@@ -10,16 +10,13 @@ spec:
   disruption:
     consolidationPolicy: WhenEmptyOrUnderutilized
     consolidateAfter: 30s
+    # Disrupt one node at a time. Drift no longer fires falsely since provider
+    # v1.4.2, so drifted nodes (e.g. after a NodePool change) are replaced too.
     budgets:
     - nodes: "1"
       reasons:
       - Empty
       - Underutilized
-    # The provider reports Drifted=InstanceTypeNotFound for healthy nodes, and
-    # Karpenter then replaces them in a loop (new VM, drain, repeat). Block drift
-    # disruption until the provider is fixed.
-    - nodes: "0"
-      reasons:
       - Drifted
   template:
     spec:
