@@ -1,6 +1,6 @@
 image:
   repository: cr-hn-1.bizflycloud.vn/31ff9581861a4d0ea4df5e7dda0f665d/karpenter-provider-bizflycloud
-  tag: v1.4.3
+  tag: v1.4.4
   pullPolicy: IfNotPresent
 
 bizflycloud:
