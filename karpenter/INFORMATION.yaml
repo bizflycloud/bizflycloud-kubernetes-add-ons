@@ -1,6 +1,6 @@
 type: karpenter
 name: Karpenter Autoscaler
-version: v1.4.3
+version: v1.4.4
 short_description: Giải pháp Node Autoscaling thế hệ mới tự động cấp phát và tối ưu hóa Cloud Server cho cụm BKE theo thời gian thực
 icon_url: https://raw.githubusercontent.com/aws/karpenter/main/website/static/img/logo.svg
 catalog: Autoscaling
